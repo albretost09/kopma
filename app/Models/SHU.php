@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class SHU extends Model
+{
+    use HasFactory;
+
+    protected $table = 'shu';
+
+    protected $guarded = [];
+}

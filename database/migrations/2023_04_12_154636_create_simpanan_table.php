@@ -20,7 +20,7 @@ class CreateSimpananTable extends Migration
             $table->foreignId('pengguna_id')->constrained('pengguna');
             $table->integer('jumlah');
             $table->string('jenis_simpanan');
-            $table->string('jenis_transaksi');
+            $table->string('jenis_transaksi')->nullable();
             $table->string('bukti_transaksi')->nullable();
             $table->dateTime('tanggal_transaksi')->default(now());
             $table->string('status')->default('DITERIMA');

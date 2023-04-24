@@ -31,8 +31,14 @@ class SetorSimpananController extends Controller
             ->where('pengguna_id', auth()->user()->id)
             ->where('jenis_simpanan', 'Pokok')->exists();
 
-        if (!$simpananPokok) {
-            return redirect()->route('anggota.setor-simpanan.index')->with('error', 'Anda belum memiliki simpanan pokok');
+        if ($request->jenis_simpanan == 'Pokok') {
+            if ($simpananPokok) {
+                return redirect()->route('anggota.setor-simpanan.index')->with('error', 'Anda sudah memiliki simpanan pokok');
+            }
+        } else {
+            if (!$simpananPokok) {
+                return redirect()->route('anggota.setor-simpanan.index')->with('error', 'Anda belum memiliki simpanan pokok');
+            }
         }
 
         $result = Simpanan::create($data);

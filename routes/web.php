@@ -18,7 +18,7 @@ Route::prefix('recovery-password')->name('recovery-password.')->group(function (
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('', [Anggota\Dashboard\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [Anggota\Dashboard\DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [Anggota\Auth\LoginController::class, 'logout'])->name('logout');
 
     Route::name('anggota.')->group(function () {
@@ -114,5 +114,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('simpanan', Admin\Simpanan\SimpananController::class);
         Route::get('permintaan-penarikan/{id}/status', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'changeStatus'])->name('permintaan-penarikan.ubah-status');
         Route::resource('permintaan-penarikan', Admin\Simpanan\PermintaanPenarikanSimpananController::class);
+
+        Route::prefix('pembagian-shu')->name('pembagian-shu.')->group(function () {
+            Route::get('', [Admin\SHU\PembagianSHUController::class, 'index'])->name('index');
+            Route::post('', [Admin\SHU\PembagianSHUController::class, 'store'])->name('store');
+        });
     });
 });
+
+
+Route::view('/', 'layouts.front');

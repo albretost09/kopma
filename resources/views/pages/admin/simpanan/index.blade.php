@@ -58,26 +58,25 @@
                                                 @else
                                                     <td>{{ $s->jenis_transaksi }}</td>
                                                 @endif
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">No data available in table</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
-                            </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="text-center">No data available in table</td>
-                            </tr>
-                            @endforelse
-                            </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- ./ Content -->
 
-    </div>
-    <!-- ./ Content -->
-
-    @include('includes.admin.footer')
+        @include('includes.admin.footer')
     </div>
 @endsection
 
@@ -90,6 +89,23 @@
                     "targets": [0]
                 }],
             });
+
+            toastr.options = {
+                timeOut: 3000,
+                progressBar: true,
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                showDuration: 200,
+                hideDuration: 200
+            };
+
+            @if (session()->has('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+
+            @if (session()->has('error'))
+                toastr.danger("{{ session('error') }}");
+            @endif
         });
     </script>
 @endpush
