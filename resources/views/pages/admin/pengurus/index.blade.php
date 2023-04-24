@@ -18,11 +18,12 @@
                     </nav>
                 </div>
                 <div class="mt-2 mt-md-0">
-                    <a href="{{ route('admin.pengurus.create') }}" class="btn btn-primary">
-                        <span>Tambah Pengurus</span>
+                    <a href="#modalTambahPengurus" class="btn btn-primary"
+                        data-remote="{{ route('admin.pengurus.create') }}" data-toggle="modal"
+                        data-target="#modalTambahPengurus" data-title="Tambah Pengurus">
+                        Tambah Pengurus
                     </a>
                 </div>
-
             </div>
 
             <div class="row">
@@ -109,6 +110,22 @@
         </div>
         <!-- ./ Content -->
 
+        <div class="modal" id="modalTambahPengurus" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal" id="myModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -173,6 +190,13 @@
             @endif
 
             jQuery(document).ready(function($) {
+                $('#modalTambahPengurus').on('show.bs.modal', function(e) {
+                    var button = $(e.relatedTarget);
+                    var modal = $(this);
+                    modal.find('.modal-body').load(button.data("remote"));
+                    modal.find('.modal-title').html(button.data("title"));
+                });
+
                 $('#myModal').on('show.bs.modal', function(e) {
                     var button = $(e.relatedTarget);
                     var modal = $(this);

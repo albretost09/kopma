@@ -183,7 +183,8 @@
                                         <div class="text-center py-4">
                                             <h5 class="text-center">{{ auth()->user()->nama }}</h5>
                                             <div class="mb-3 small text-center text-muted">PENGURUS</div>
-                                            <a href="#" class="btn btn-outline-light btn-rounded">Manage Your
+                                            <a href="{{ route('pengurus.profil.index') }}"
+                                                class="btn btn-outline-light btn-rounded">Manage Your
                                                 Account</a>
                                         </div>
                                         <div class="list-group text-center">
@@ -205,7 +206,8 @@
                                         <div class="text-center py-4">
                                             <h5 class="text-center">{{ auth()->user()->nama }}</h5>
                                             <div class="mb-3 small text-center text-muted">Anggota</div>
-                                            <a href="#" class="btn btn-outline-light btn-rounded">Manage Your
+                                            <a href="{{ route('anggota.profil.index') }}"
+                                                class="btn btn-outline-light btn-rounded">Manage Your
                                                 Account</a>
                                         </div>
                                         <div class="list-group text-center">

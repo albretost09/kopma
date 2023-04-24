@@ -20,6 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [Anggota\Auth\LoginController::class, 'logout'])->name('logout');
 
     Route::name('anggota.')->group(function () {
+        Route::prefix('profil')->name('profil.')->group(function () {
+            Route::get('', [Anggota\Profil\ProfilController::class, 'index'])->name('index');
+            Route::put('ubah', Anggota\Profil\UbahProfilController::class)->name('ubah-profil');
+            Route::put('ubah-password', Anggota\Profil\UbahPasswordController::class)->name('ubah-password');
+        });
+
         Route::prefix('setor-simpanan')->name('setor-simpanan.')->group(function () {
             Route::get('', [Anggota\Simpanan\SetorSimpananController::class, 'index'])->name('index');
             Route::post('', [Anggota\Simpanan\SetorSimpananController::class, 'store'])->name('store');
@@ -49,6 +55,11 @@ Route::prefix('pengurus')->name('pengurus.')->group(
         Route::middleware(['auth', 'pengurus'])->group(function () {
             Route::get('', [Pengurus\Dashboard\DashboardController::class, 'index'])->name('dashboard');
             Route::post('logout', [Pengurus\Auth\LoginController::class, 'logout'])->name('logout');
+            Route::prefix('profil')->name('profil.')->group(function () {
+                Route::get('', [Pengurus\Profil\ProfilController::class, 'index'])->name('index');
+                Route::put('ubah', Pengurus\Profil\UbahProfilController::class)->name('ubah-profil');
+                Route::put('ubah-password', Pengurus\Profil\UbahPasswordController::class)->name('ubah-password');
+            });
 
             Route::get('anggota/{id}/status', [Pengurus\AnggotaController::class, 'status'])->name('anggota.status');
             Route::put('anggota/{id}/status', [Pengurus\AnggotaController::class, 'ubahStatus'])->name('anggota.ubah-status');
