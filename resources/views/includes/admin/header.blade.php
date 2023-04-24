@@ -173,6 +173,28 @@
                                         </div>
                                     </div>
                                 </li>
+                            @elseif (auth()->user() && auth()->user()->role == 'PENGURUS')
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" title="User menu"
+                                        data-toggle="dropdown">
+                                        <span class="ml-2 d-sm-inline d-none">{{ auth()->user()->nama }}</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                                        <div class="text-center py-4">
+                                            <h5 class="text-center">{{ auth()->user()->nama }}</h5>
+                                            <div class="mb-3 small text-center text-muted">PENGURUS</div>
+                                            <a href="#" class="btn btn-outline-light btn-rounded">Manage Your
+                                                Account</a>
+                                        </div>
+                                        <div class="list-group text-center">
+                                            <form action="{{ route('pengurus.logout') }}" method="post">
+                                                @csrf
+                                                <a href="#" class="list-group-item text-danger"
+                                                    onclick="$(this).closest('form').submit();">Sign Out!</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
                             @elseif (auth()->check())
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" title="User menu"

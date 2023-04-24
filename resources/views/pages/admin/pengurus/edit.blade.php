@@ -8,13 +8,13 @@
 
             <div class="page-header">
                 <div>
-                    <h3>Edit Anggota</h3>
+                    <h3>Edit Pengurus</h3>
                     <nav aria-label="breadcrumb" class="d-flex align-items-start">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href={{ route('admin.dashboard') }}>Home</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Anggota</li>
+                            <li class="breadcrumb-item active" aria-current="page">Pengurus</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,8 +26,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h6 class="card-title">Edit Anggota</h6>
-                                    <form action="{{ route('admin.anggota.update', $anggota->id) }}" method="post">
+                                    <h6 class="card-title">Edit Pengurus</h6>
+                                    <form action="{{ route('admin.pengurus.update', $pengurus->id) }}" method="post">
                                         @csrf
                                         @method('PUT')
                                         <div class="row">
@@ -35,59 +35,59 @@
                                                 <div class="form-group">
                                                     <label>Nama</label>
                                                     <input type="text" name="nama" class="form-control"
-                                                        value="{{ $anggota->nama }}">
+                                                        value="{{ $pengurus->nama }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Username</label>
                                                     <input type="text" name="username" class="form-control"
-                                                        value="{{ $anggota->username }}">
+                                                        value="{{ $pengurus->username }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Email</label>
                                                     <input type="email" name="email" class="form-control"
-                                                        value="{{ $anggota->email }}">
+                                                        value="{{ $pengurus->email }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>NIM</label>
                                                     <input type="text" name="nim" class="form-control"
-                                                        value="{{ $anggota->nim }}">
+                                                        value="{{ $pengurus->nim }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Fakultas</label>
                                                     <select class="form-control" name="fakultas">
                                                         <option
-                                                            value="FKIP"{{ $anggota->fakultas == 'FKIP' ? ' selected' : '' }}>
+                                                            value="FKIP"{{ $pengurus->fakultas == 'FKIP' ? ' selected' : '' }}>
                                                             FKIP</option>
                                                         <option
-                                                            value="Ekonomi"{{ $anggota->fakultas == 'Ekonomi' ? ' selected' : '' }}>
+                                                            value="Ekonomi"{{ $pengurus->fakultas == 'Ekonomi' ? ' selected' : '' }}>
                                                             Ekonomi</option>
                                                         <option
-                                                            value="Pertanian"{{ $anggota->fakultas == 'Pertanian' ? ' selected' : '' }}>
+                                                            value="Pertanian"{{ $pengurus->fakultas == 'Pertanian' ? ' selected' : '' }}>
                                                             Pertanian
                                                         </option>
                                                         <option
-                                                            value="Teknik"{{ $anggota->fakultas == 'Teknik' ? ' selected' : '' }}>
+                                                            value="Teknik"{{ $pengurus->fakultas == 'Teknik' ? ' selected' : '' }}>
                                                             Teknik</option>
                                                         <option
-                                                            value="Hukum"{{ $anggota->fakultas == 'Hukum' ? ' selected' : '' }}>
+                                                            value="Hukum"{{ $pengurus->fakultas == 'Hukum' ? ' selected' : '' }}>
                                                             Hukum</option>
                                                         <option
-                                                            value="FISIP"{{ $anggota->fakultas == 'FISIP' ? ' selected' : '' }}>
+                                                            value="FISIP"{{ $pengurus->fakultas == 'FISIP' ? ' selected' : '' }}>
                                                             FISIP</option>
                                                         <option
-                                                            value="Dokter"{{ $anggota->fakultas == 'Dokter' ? ' selected' : '' }}>
+                                                            value="Dokter"{{ $pengurus->fakultas == 'Dokter' ? ' selected' : '' }}>
                                                             Dokter</option>
                                                         <option
-                                                            value="MIPA"{{ $anggota->fakultas == 'MIPA' ? ' selected' : '' }}>
+                                                            value="MIPA"{{ $pengurus->fakultas == 'MIPA' ? ' selected' : '' }}>
                                                             MIPA</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>No. HP</label>
                                                     <input type="text" name="no_hp" id="no_hp" class="form-control"
-                                                        value="{{ $anggota->no_hp }}">
+                                                        value="{{ $pengurus->no_hp }}">
                                                 </div>
                                             </div>
                                         </div>

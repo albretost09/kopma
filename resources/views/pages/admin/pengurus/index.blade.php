@@ -62,11 +62,15 @@
                                                             <i class="ti-more-alt"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="#" class="dropdown-item">View Detail</a>
-                                                            <a href="#" class="dropdown-item">Send</a>
-                                                            <a href="#" class="dropdown-item">Download</a>
-                                                            <a href="#" class="dropdown-item">Print</a>
-                                                            <a href="#" class="dropdown-item text-danger">Delete</a>
+                                                            <a href="{{ route('admin.pengurus.edit', $p->id) }}"
+                                                                class="dropdown-item">Edit</a>
+                                                            <form action="{{ route('admin.pengurus.destroy', $p->id) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="dropdown-item text-danger">Delete</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -100,6 +104,23 @@
                     "targets": [0, 5]
                 }],
             });
+
+            toastr.options = {
+                timeOut: 3000,
+                progressBar: true,
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                showDuration: 200,
+                hideDuration: 200
+            };
+
+            @if (session()->has('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+
+            @if (session()->has('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
         });
     </script>
 @endpush

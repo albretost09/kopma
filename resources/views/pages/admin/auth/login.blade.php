@@ -26,7 +26,7 @@
                     <input type="checkbox" name="remember" class="custom-control-input" checked="" id="customCheck1">
                     <label class="custom-control-label" for="customCheck1">Remember me</label>
                 </div>
-                <a href="recovery-password.html">Reset password</a>
+                <a href="{{ route('admin.recovery-password.index') }}">Reset password</a>
             </div>
             <button class="btn btn-primary btn-block">Sign in</button>
         </form>
@@ -45,6 +45,14 @@
                 showDuration: 200,
                 hideDuration: 200
             };
+
+            @if (session()->has('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+
+            @if (session()->has('error'))
+                toastr.danger("{{ session('error') }}");
+            @endif
 
             @if (session()->has('errors'))
                 toastr.error("{{ session('errors')->first('username') }}");

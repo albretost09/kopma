@@ -53,7 +53,15 @@
                                                 </td>
                                                 <td>
                                                     <div>{{ 'Rp. ' . number_format($s->jumlah, 0, ',', '.') }}</div>
-                                                    <div>{{ $s->status }}</div>
+                                                    <div>
+                                                        @if ($s->status == 'MENUNGGU')
+                                                            <span class="badge badge-warning">Menunggu</span>
+                                                        @elseif($s->status == 'DITERIMA')
+                                                            <span class="badge badge-success">Berhasil</span>
+                                                        @else
+                                                            <span class="badge badge-danger">Gagal</span>
+                                                        @endif
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -74,7 +82,15 @@
                                                 <td>
                                                     <div>{{ 'Rp. ' . number_format($rp->jumlah_penarikan, 0, ',', '.') }}
                                                     </div>
-                                                    <div>{{ $s->status }}</div>
+                                                    <div>
+                                                        @if ($rp->status == 'MENUNGGU')
+                                                            <span class="badge badge-warning">Menunggu</span>
+                                                        @elseif($rp->status == 'DITERIMA')
+                                                            <span class="badge badge-success">Berhasil</span>
+                                                        @else
+                                                            <span class="badge badge-danger">Gagal</span>
+                                                        @endif
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

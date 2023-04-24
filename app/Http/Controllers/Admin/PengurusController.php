@@ -31,7 +31,7 @@ class PengurusController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.pengurus.create');
     }
 
     /**
@@ -42,7 +42,30 @@ class PengurusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'username' => 'required|unique:pengguna,username',
+            'email' => 'required|email|unique:pengguna,email',
+            'nim' => 'required|unique:pengguna,nim',
+            'fakultas' => 'required|in:FKIP,Ekonomi,Pertanian,Teknik,Hukum,FISIP,Dokter,MIPA',
+            'no_hp' => 'nullable',
+        ]);
+
+        $result = Pengguna::create([
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'email' => $request->email,
+            'nim' => $request->nim,
+            'fakultas' => $request->fakultas,
+            'no_hp' => $request->no_hp,
+            'role' => 'PENGURUS',
+        ]);
+
+        if ($result) {
+            return redirect()->route('admin.pengurus.index')->with('success', 'Pengurus berhasil ditambahkan');
+        } else {
+            return redirect()->route('admin.pengurus.index')->with('error', 'Pengurus gagal ditambahkan');
+        }
     }
 
     /**
@@ -64,7 +87,9 @@ class PengurusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pengurus = Pengguna::findOrFail($id);
+
+        return view('pages.admin.pengurus.edit', compact('pengurus'));
     }
 
     /**
@@ -76,7 +101,24 @@ class PengurusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'username' => 'required|unique:pengguna,username,' . $id,
+            'email' => 'required|email|unique:pengguna,email,' . $id,
+            'nim' => 'required|unique:pengguna,nim,' . $id,
+            'fakultas' => 'required|in:FKIP,Ekonomi,Pertanian,Teknik,Hukum,FISIP,Dokter,MIPA',
+            'no_hp' => 'nullable',
+        ]);
+
+        $pengurus = Pengguna::findOrFail($id);
+
+        $result = $pengurus->update($request->all());
+
+        if ($result) {
+            return redirect()->route('admin.pengurus.index')->with('success', 'Pengurus berhasil diubah');
+        } else {
+            return redirect()->route('admin.pengurus.index')->with('error', 'Pengurus gagal diubah');
+        }
     }
 
     /**
@@ -87,6 +129,14 @@ class PengurusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pengurus = Pengguna::findOrFail($id);
+
+        $result = $pengurus->delete();
+
+        if ($result) {
+            return redirect()->route('admin.pengurus.index')->with('success', 'Pengurus berhasil dihapus');
+        } else {
+            return redirect()->route('admin.pengurus.index')->with('error', 'Pengurus gagal dihapus');
+        }
     }
 }

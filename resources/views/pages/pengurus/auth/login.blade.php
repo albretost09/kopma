@@ -13,7 +13,7 @@
         <h5>Sign in</h5>
 
         <!-- form -->
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('pengurus.login') }}" method="POST">
             @csrf
             <div class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
@@ -26,12 +26,9 @@
                     <input type="checkbox" name="remember" class="custom-control-input" checked="" id="customCheck1">
                     <label class="custom-control-label" for="customCheck1">Remember me</label>
                 </div>
-                <a href="{{ route('recovery-password.index') }}">Reset password</a>
+                <a href="{{ route('pengurus.recovery-password.index') }}">Reset password</a>
             </div>
             <button class="btn btn-primary btn-block">Sign in</button>
-            <hr>
-            <p class="text-muted">Don't have an account?</p>
-            <a href="register.html" class="btn btn-outline-light btn-sm">Register now!</a>
         </form>
         <!-- ./ form -->
     </div>

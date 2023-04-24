@@ -78,7 +78,24 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'username' => 'required|unique:pengguna,username,' . $id,
+            'email' => 'required|email|unique:pengguna,email,' . $id,
+            'nim' => 'required|unique:pengguna,nim,' . $id,
+            'fakultas' => 'required|in:FKIP,Ekonomi,Pertanian,Teknik,Hukum,FISIP,Dokter,MIPA',
+            'no_hp' => 'nullable',
+        ]);
+
+        $anggota = Pengguna::findOrFail($id);
+
+        $result = $anggota->update($request->all());
+
+        if ($result) {
+            return redirect()->route('admin.anggota.index')->with('success', 'Data berhasil diubah');
+        } else {
+            return redirect()->route('admin.anggota.index')->with('error', 'Data gagal diubah');
+        }
     }
 
     /**
@@ -89,6 +106,14 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $anggota = Pengguna::findOrFail($id);
+
+        $result = $anggota->delete();
+
+        if ($result) {
+            return redirect()->route('admin.anggota.index')->with('success', 'Data berhasil dihapus');
+        } else {
+            return redirect()->route('admin.anggota.index')->with('error', 'Data gagal dihapus');
+        }
     }
 }
