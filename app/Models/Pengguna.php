@@ -29,4 +29,9 @@ class Pengguna extends Authenticatable implements CanResetPassword
     {
         return $this->hasMany(Simpanan::class, 'pengguna_id');
     }
+
+    public function getJenisKelaminAttribute($value)
+    {
+        return $value == 'L' ? 'Laki-laki' : 'Perempuan';
+    }
 }

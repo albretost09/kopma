@@ -65,18 +65,18 @@
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <a href="#myModal" class="dropdown-item"
-                                                                data-remote="{{ route('admin.anggota.show', $a->id) }}"
+                                                                data-remote="{{ route('pengurus.anggota.show', $a->id) }}"
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-title="Detail Anggota">
                                                                 Lihat Detail
                                                             </a>
                                                             <a href="#modalStatus" class="dropdown-item"
-                                                                data-remote="{{ route('admin.anggota.status', $a->id) }}"
+                                                                data-remote="{{ route('pengurus.anggota.status', $a->id) }}"
                                                                 data-toggle="modal" data-target="#modalStatus"
                                                                 data-title="Ubah Status">
                                                                 Ubah Status
                                                             </a>
-                                                            <form action="{{ route('admin.anggota.destroy', $a->id) }}"
+                                                            <form action="{{ route('pengurus.anggota.destroy', $a->id) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 @method('DELETE')

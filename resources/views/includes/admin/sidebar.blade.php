@@ -101,8 +101,8 @@
                 </li>
             @elseif(auth()->user() && auth()->user()->role == 'PENGURUS')
                 <li>
-                    <a {{ request()->routeIs('admin.dashboard') ? 'class=active ' : '' }}
-                        href="{{ route('admin.dashboard') }}">
+                    <a {{ request()->routeIs('pengurus.dashboard') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.dashboard') }}">
                         <span class="nav-link-icon">
                             <i data-feather="pie-chart"></i>
                         </span>
@@ -110,8 +110,8 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('admin.anggota*') ? 'class=active ' : '' }}
-                        href="{{ route('admin.anggota.index') }}">
+                    <a {{ request()->routeIs('pengurus.anggota*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.anggota.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="user"></i>
                         </span>
@@ -128,8 +128,8 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('admin.kas*') ? 'class=active ' : '' }}
-                        href="{{ route('admin.kas.index') }}">
+                    <a {{ request()->routeIs('pengurus.kas*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.kas.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="dollar-sign"></i>
                         </span>
@@ -137,8 +137,8 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('anggota.setor-simpanan*') ? 'class=active ' : '' }}
-                        href="{{ route('anggota.setor-simpanan.index') }}">
+                    <a {{ request()->routeIs('pengurus.setor-simpanan*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.setor-simpanan.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="dollar-sign"></i>
                         </span>

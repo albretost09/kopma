@@ -39,6 +39,7 @@
                                             <th>Fakultas</th>
                                             <th>Email</th>
                                             <th>No. HP</th>
+                                            <th>Status</th>
                                             <th class="text-right">Aksi</th>
                                         </tr>
                                     </thead>
@@ -55,6 +56,13 @@
                                                 <td>{{ $p->fakultas }}</td>
                                                 <td>{{ $p->email }}</td>
                                                 <td>{{ $p->no_hp }}</td>
+                                                <td>
+                                                    @if ($p->status == 'AKTIF')
+                                                        <span class="badge badge-success">Aktif</span>
+                                                    @else
+                                                        <span class="badge badge-danger">Tidak Aktif</span>
+                                                    @endif
+                                                </td>
                                                 <td class="text-right">
                                                     <div class="dropdown">
                                                         <a href="#" data-toggle="dropdown" class="btn btn-floating"
@@ -62,8 +70,18 @@
                                                             <i class="ti-more-alt"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            <a href="{{ route('admin.pengurus.edit', $p->id) }}"
-                                                                class="dropdown-item">Edit</a>
+                                                            <a href="#myModal" class="dropdown-item"
+                                                                data-remote="{{ route('admin.pengurus.show', $p->id) }}"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-title="Detail Anggota">
+                                                                Lihat Detail
+                                                            </a>
+                                                            <a href="#modalStatus" class="dropdown-item"
+                                                                data-remote="{{ route('admin.pengurus.status', $p->id) }}"
+                                                                data-toggle="modal" data-target="#modalStatus"
+                                                                data-title="Ubah Status">
+                                                                Ubah Status
+                                                            </a>
                                                             <form action="{{ route('admin.pengurus.destroy', $p->id) }}"
                                                                 method="post">
                                                                 @csrf
@@ -77,7 +95,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="6" class="text-center">No data available in table</td>
+                                                <td colspan="7" class="text-center">No data available in table</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -91,6 +109,38 @@
         </div>
         <!-- ./ Content -->
 
+        <div class="modal" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modalStatus" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @include('includes.admin.footer')
     </div>
 @endsection
@@ -101,7 +151,7 @@
             var table = $('#managers').DataTable({
                 'columnDefs': [{
                     "orderable": false,
-                    "targets": [0, 5]
+                    "targets": [0, 6]
                 }],
             });
 
@@ -121,6 +171,22 @@
             @if (session()->has('error'))
                 toastr.error("{{ session('error') }}");
             @endif
+
+            jQuery(document).ready(function($) {
+                $('#myModal').on('show.bs.modal', function(e) {
+                    var button = $(e.relatedTarget);
+                    var modal = $(this);
+                    modal.find('.modal-body').load(button.data("remote"));
+                    modal.find('.modal-title').html(button.data("title"));
+                });
+
+                $('#modalStatus').on('show.bs.modal', function(e) {
+                    var button = $(e.relatedTarget);
+                    var modal = $(this);
+                    modal.find('.modal-body').load(button.data("remote"));
+                    modal.find('.modal-title').html(button.data("title"));
+                });
+            });
         });
     </script>
 @endpush

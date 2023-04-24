@@ -76,7 +76,9 @@ class PengurusController extends Controller
      */
     public function show($id)
     {
-        //
+        $pengurus = Pengguna::findOrFail($id);
+
+        return view('pages.admin.pengurus.show', compact('pengurus'));
     }
 
     /**
@@ -87,9 +89,33 @@ class PengurusController extends Controller
      */
     public function edit($id)
     {
+        //
+    }
+
+    public function status($id)
+    {
         $pengurus = Pengguna::findOrFail($id);
 
-        return view('pages.admin.pengurus.edit', compact('pengurus'));
+        return view('pages.admin.pengurus.status', compact('pengurus'));
+    }
+
+    public function ubahStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:AKTIF,NONAKTIF',
+        ]);
+
+        $pengurus = Pengguna::findOrFail($id);
+
+        $result = $pengurus->update([
+            'status' => $request->status,
+        ]);
+
+        if ($result) {
+            return redirect()->route('admin.pengurus.index')->with('success', 'Status berhasil diubah');
+        } else {
+            return redirect()->route('admin.pengurus.index')->with('error', 'Status gagal diubah');
+        }
     }
 
     /**

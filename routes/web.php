@@ -49,6 +49,19 @@ Route::prefix('pengurus')->name('pengurus.')->group(
         Route::middleware(['auth', 'pengurus'])->group(function () {
             Route::get('', [Pengurus\Dashboard\DashboardController::class, 'index'])->name('dashboard');
             Route::post('logout', [Pengurus\Auth\LoginController::class, 'logout'])->name('logout');
+
+            Route::get('anggota/{id}/status', [Pengurus\AnggotaController::class, 'status'])->name('anggota.status');
+            Route::put('anggota/{id}/status', [Pengurus\AnggotaController::class, 'ubahStatus'])->name('anggota.ubah-status');
+            Route::resource('anggota', Pengurus\AnggotaController::class);
+            Route::get('kas/data', [Pengurus\KasController::class, 'data'])->name('kas.data');
+            Route::resource('kas', Pengurus\KasController::class);
+
+            Route::prefix('setor-simpanan')->name('setor-simpanan.')->group(function () {
+                Route::get('', [Pengurus\Simpanan\SetorSimpananController::class, 'index'])->name('index');
+                Route::post('', [Pengurus\Simpanan\SetorSimpananController::class, 'store'])->name('store');
+            });
+
+            Route::get('riwayat-simpanan', [Pengurus\Simpanan\RiwayatSimpananController::class, 'index'])->name('riwayat-simpanan.index');
         });
     }
 );
@@ -73,7 +86,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('ubah-password', Admin\Profil\UbahPasswordController::class)->name('ubah-password');
         });
 
+        Route::get('anggota/{id}/status', [Admin\AnggotaController::class, 'status'])->name('anggota.status');
+        Route::put('anggota/{id}/status', [Admin\AnggotaController::class, 'ubahStatus'])->name('anggota.ubah-status');
         Route::resource('anggota', Admin\AnggotaController::class);
+        Route::get('pengurus/{id}/status', [Admin\PengurusController::class, 'status'])->name('pengurus.status');
+        Route::put('pengurus/{id}/status', [Admin\PengurusController::class, 'ubahStatus'])->name('pengurus.ubah-status');
         Route::resource('pengurus', Admin\PengurusController::class);
         Route::resource('pengawas', Admin\PengawasController::class);
         Route::get('kas/data', [Admin\KasController::class, 'data'])->name('kas.data');

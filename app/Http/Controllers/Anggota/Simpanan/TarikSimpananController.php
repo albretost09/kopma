@@ -47,12 +47,36 @@ class TarikSimpananController extends Controller
         ]);
 
         $jumlah_tarik = $request->jumlah_penarikan;
-        $simpanans = Simpanan::query()
+        $jumlah_tarik = str_replace('.', '', $jumlah_tarik);
+        $simpanan = Simpanan::query()
             ->where('pengguna_id', auth()->user()->id)
             ->where('jenis_simpanan', 'Sukarela')
             ->where('status', 'DITERIMA')
-            ->orderBy('jumlah', 'asc')
-            ->get();
+            ->orderBy('jumlah', 'asc');
+
+        $jumlahSimpanan = $simpanan->sum('jumlah');
+
+        $riwayatPenarikan = $simpanan->with('riwayatPenarikan')->get()->map(function ($item) {
+            return $item->riwayatPenarikan;
+        })->filter(function ($item) {
+            return $item->count() > 0;
+        })->flatten();
+
+        $riwayatPenarikan = $riwayatPenarikan->map(function ($item) {
+            return $item->status != 'DITOLAK' ? $item : null;
+        })->filter(function ($item) {
+            return $item != null;
+        })->flatten();
+
+        $jumlahRiwayatPenarikan = $riwayatPenarikan->sum('jumlah_penarikan');
+
+        $saldoSimpanan = $jumlahSimpanan - $jumlahRiwayatPenarikan;
+
+        if ($jumlah_tarik > $saldoSimpanan) {
+            return redirect()->route('anggota.tarik-simpanan.index')->with('error', 'Penarikan gagal diajukan');
+        }
+
+        $simpanans = $simpanan->get();
 
         DB::transaction(function () use ($simpanans, $jumlah_tarik) {
             try {

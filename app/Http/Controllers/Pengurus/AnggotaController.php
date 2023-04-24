@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pengurus;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class AnggotaController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.admin.anggota.index', compact('anggota'));
+        return view('pages.pengurus.anggota.index', compact('anggota'));
     }
 
     /**
@@ -55,7 +55,7 @@ class AnggotaController extends Controller
     {
         $anggota = Pengguna::findOrFail($id);
 
-        return view('pages.admin.anggota.show', compact('anggota'));
+        return view('pages.pengurus.anggota.show', compact('anggota'));
     }
 
     /**
@@ -68,14 +68,14 @@ class AnggotaController extends Controller
     {
         $anggota = Pengguna::findOrFail($id);
 
-        return view('pages.admin.anggota.edit', compact('anggota'));
+        return view('pages.pengurus.anggota.edit', compact('anggota'));
     }
 
     public function status($id)
     {
         $anggota = Pengguna::findOrFail($id);
 
-        return view('pages.admin.anggota.status', compact('anggota'));
+        return view('pages.pengurus.anggota.status', compact('anggota'));
     }
 
     public function ubahStatus(Request $request, $id)
@@ -91,9 +91,9 @@ class AnggotaController extends Controller
         ]);
 
         if ($result) {
-            return redirect()->route('admin.anggota.index')->with('success', 'Status berhasil diubah');
+            return redirect()->route('pengurus.anggota.index')->with('success', 'Status berhasil diubah');
         } else {
-            return redirect()->route('admin.anggota.index')->with('error', 'Status gagal diubah');
+            return redirect()->route('pengurus.anggota.index')->with('error', 'Status gagal diubah');
         }
     }
 
@@ -120,9 +120,9 @@ class AnggotaController extends Controller
         $result = $anggota->update($request->all());
 
         if ($result) {
-            return redirect()->route('admin.anggota.index')->with('success', 'Data berhasil diubah');
+            return redirect()->route('pengurus.anggota.index')->with('success', 'Data berhasil diubah');
         } else {
-            return redirect()->route('admin.anggota.index')->with('error', 'Data gagal diubah');
+            return redirect()->route('pengurus.anggota.index')->with('error', 'Data gagal diubah');
         }
     }
 
@@ -139,9 +139,9 @@ class AnggotaController extends Controller
         $result = $anggota->delete();
 
         if ($result) {
-            return redirect()->route('admin.anggota.index')->with('success', 'Data berhasil dihapus');
+            return redirect()->route('pengurus.anggota.index')->with('success', 'Data berhasil dihapus');
         } else {
-            return redirect()->route('admin.anggota.index')->with('error', 'Data gagal dihapus');
+            return redirect()->route('pengurus.anggota.index')->with('error', 'Data gagal dihapus');
         }
     }
 }

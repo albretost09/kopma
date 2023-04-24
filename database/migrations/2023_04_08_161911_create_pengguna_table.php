@@ -41,6 +41,7 @@ class CreatePenggunaTable extends Migration
         Pengguna::factory()->create([
             'nama' => 'Angellita',
             'username' => 'angellita',
+            'role' => 'ANGGOTA',
         ]);
     }
 
