@@ -31,7 +31,7 @@
             <button class="btn btn-primary btn-block">Sign in</button>
             <hr>
             <p class="text-muted">Don't have an account?</p>
-            <a href="register.html" class="btn btn-outline-light btn-sm">Register now!</a>
+            <a href="{{ route('register.index') }}" class="btn btn-outline-light btn-sm">Register now!</a>
         </form>
         <!-- ./ form -->
     </div>

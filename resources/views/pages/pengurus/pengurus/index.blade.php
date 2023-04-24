@@ -19,7 +19,7 @@
                 </div>
                 <div class="mt-2 mt-md-0">
                     <a href="#modalTambahPengurus" class="btn btn-primary"
-                        data-remote="{{ route('admin.pengurus.create') }}" data-toggle="modal"
+                        data-remote="{{ route('pengurus.pengurus.create') }}" data-toggle="modal"
                         data-target="#modalTambahPengurus" data-title="Tambah Pengurus">
                         Tambah Pengurus
                     </a>
@@ -72,18 +72,18 @@
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <a href="#myModal" class="dropdown-item"
-                                                                data-remote="{{ route('admin.pengurus.show', $p->id) }}"
+                                                                data-remote="{{ route('pengurus.pengurus.show', $p->id) }}"
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-title="Detail Anggota">
                                                                 Lihat Detail
                                                             </a>
                                                             <a href="#modalStatus" class="dropdown-item"
-                                                                data-remote="{{ route('admin.pengurus.status', $p->id) }}"
+                                                                data-remote="{{ route('pengurus.pengurus.status', $p->id) }}"
                                                                 data-toggle="modal" data-target="#modalStatus"
                                                                 data-title="Ubah Status">
                                                                 Ubah Status
                                                             </a>
-                                                            <form action="{{ route('admin.pengurus.destroy', $p->id) }}"
+                                                            <form action="{{ route('pengurus.pengurus.destroy', $p->id) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 @method('DELETE')

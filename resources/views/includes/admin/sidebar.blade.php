@@ -119,8 +119,8 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('admin.pengurus*') ? 'class=active ' : '' }}
-                        href="{{ route('admin.pengurus.index') }}">
+                    <a {{ request()->routeIs('pengurus.pengurus*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.pengurus.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="user"></i>
                         </span>

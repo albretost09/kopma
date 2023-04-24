@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body p-0">
         <div class="col-md-12">
-            <form action="{{ route('admin.pengurus.store') }}" method="POST">
+            <form action="{{ route('pengurus.pengurus.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="pengurus">Email</label>

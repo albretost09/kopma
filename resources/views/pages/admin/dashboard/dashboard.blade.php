@@ -874,3 +874,24 @@
         @include('includes.admin.footer')
     </div>
 @endsection
+
+@push('script')
+    <script>
+        toastr.options = {
+            timeOut: 3000,
+            progressBar: true,
+            showMethod: "slideDown",
+            hideMethod: "slideUp",
+            showDuration: 200,
+            hideDuration: 200
+        };
+
+        @if (session()->has('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
+
+        @if (session()->has('error'))
+            toastr.danger("{{ session('error') }}");
+        @endif
+    </script>
+@endpush

@@ -15,6 +15,8 @@
 
     <!-- App styles -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/app.min.css') }}" type="text/css">
+
+    @stack('style')
 </head>
 
 <body class="form-membership">

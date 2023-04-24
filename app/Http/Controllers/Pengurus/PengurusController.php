@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pengurus;
 
 use App\Models\Pengguna;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class PengurusController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.admin.pengurus.index', compact('pengurus'));
+        return view('pages.pengurus.pengurus.index', compact('pengurus'));
     }
 
     /**
@@ -37,7 +37,7 @@ class PengurusController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.admin.pengurus.create', compact('anggota'));
+        return view('pages.pengurus.pengurus.create', compact('anggota'));
     }
 
     /**
@@ -60,11 +60,11 @@ class PengurusController extends Controller
 
         if ($result) {
             return redirect()
-                ->route('admin.pengurus.index')
+                ->route('pengurus.pengurus.index')
                 ->with('success', 'Berhasil menambahkan pengurus');
         } else {
             return redirect()
-                ->route('admin.pengurus.index')
+                ->route('pengurus.pengurus.index')
                 ->with('error', 'Gagal menambahkan pengurus');
         }
     }
@@ -79,7 +79,7 @@ class PengurusController extends Controller
     {
         $pengurus = Pengguna::findOrFail($id);
 
-        return view('pages.admin.pengurus.show', compact('pengurus'));
+        return view('pages.pengurus.pengurus.show', compact('pengurus'));
     }
 
     /**
@@ -97,7 +97,7 @@ class PengurusController extends Controller
     {
         $pengurus = Pengguna::findOrFail($id);
 
-        return view('pages.admin.pengurus.status', compact('pengurus'));
+        return view('pages.pengurus.pengurus.status', compact('pengurus'));
     }
 
     public function ubahStatus(Request $request, $id)
@@ -113,9 +113,9 @@ class PengurusController extends Controller
         ]);
 
         if ($result) {
-            return redirect()->route('admin.pengurus.index')->with('success', 'Status berhasil diubah');
+            return redirect()->route('pengurus.pengurus.index')->with('success', 'Status berhasil diubah');
         } else {
-            return redirect()->route('admin.pengurus.index')->with('error', 'Status gagal diubah');
+            return redirect()->route('pengurus.pengurus.index')->with('error', 'Status gagal diubah');
         }
     }
 
@@ -142,9 +142,9 @@ class PengurusController extends Controller
         $result = $pengurus->update($request->all());
 
         if ($result) {
-            return redirect()->route('admin.pengurus.index')->with('success', 'Pengurus berhasil diubah');
+            return redirect()->route('pengurus.pengurus.index')->with('success', 'Pengurus berhasil diubah');
         } else {
-            return redirect()->route('admin.pengurus.index')->with('error', 'Pengurus gagal diubah');
+            return redirect()->route('pengurus.pengurus.index')->with('error', 'Pengurus gagal diubah');
         }
     }
 
@@ -161,9 +161,9 @@ class PengurusController extends Controller
         $result = $pengurus->delete();
 
         if ($result) {
-            return redirect()->route('admin.pengurus.index')->with('success', 'Pengurus berhasil dihapus');
+            return redirect()->route('pengurus.pengurus.index')->with('success', 'Pengurus berhasil dihapus');
         } else {
-            return redirect()->route('admin.pengurus.index')->with('error', 'Pengurus gagal dihapus');
+            return redirect()->route('pengurus.pengurus.index')->with('error', 'Pengurus gagal dihapus');
         }
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [Anggota\Auth\LoginController::class, 'index'])->name('login');
 Route::post('login', [Anggota\Auth\LoginController::class, 'authenticate'])->name('login');
+Route::get('register', [Anggota\Auth\RegisterController::class, 'index'])->name('register.index');
+Route::post('register', [Anggota\Auth\RegisterController::class, 'store'])->name('register.store');
 Route::prefix('recovery-password')->name('recovery-password.')->group(function () {
     Route::get('', [Anggota\Auth\RecoverPasswordController::class, 'index'])->name('index');
     Route::post('', [Anggota\Auth\RecoverPasswordController::class, 'sendEmail'])->name('send-email');
@@ -64,6 +66,9 @@ Route::prefix('pengurus')->name('pengurus.')->group(
             Route::get('anggota/{id}/status', [Pengurus\AnggotaController::class, 'status'])->name('anggota.status');
             Route::put('anggota/{id}/status', [Pengurus\AnggotaController::class, 'ubahStatus'])->name('anggota.ubah-status');
             Route::resource('anggota', Pengurus\AnggotaController::class);
+            Route::get('pengurus/{id}/status', [Pengurus\PengurusController::class, 'status'])->name('pengurus.status');
+            Route::put('pengurus/{id}/status', [Pengurus\PengurusController::class, 'ubahStatus'])->name('pengurus.ubah-status');
+            Route::resource('pengurus', Pengurus\PengurusController::class);
             Route::get('kas/data', [Pengurus\KasController::class, 'data'])->name('kas.data');
             Route::resource('kas', Pengurus\KasController::class);
 
