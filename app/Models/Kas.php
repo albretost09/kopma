@@ -19,6 +19,8 @@ class Kas extends Model
 
     public function getTanggalDibuatAttribute()
     {
-        return $this->created_at->format('d-m-Y');
+        if ($this->tanggal_transaksi) {
+            return $this->tanggal_transaksi->format('d-m-Y');
+        }
     }
 }

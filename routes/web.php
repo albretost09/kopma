@@ -69,6 +69,7 @@ Route::prefix('pengurus')->name('pengurus.')->group(
             Route::resource('anggota', Pengurus\AnggotaController::class);
             Route::get('kas/data', [Pengurus\KasController::class, 'data'])->name('kas.data');
             Route::resource('kas', Pengurus\KasController::class);
+            Route::get('simpanan/data', [Pengurus\Simpanan\SimpananController::class, 'data'])->name('simpanan.data');
             Route::resource('simpanan', Pengurus\Simpanan\SimpananController::class);
 
             Route::prefix('setor-simpanan')->name('setor-simpanan.')->group(function () {
@@ -124,6 +125,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('pengawas', Admin\PengawasController::class);
         Route::get('kas/data', [Admin\KasController::class, 'data'])->name('kas.data');
         Route::resource('kas', Admin\KasController::class);
+        Route::get('simpanan/data', [Admin\Simpanan\SimpananController::class, 'data'])->name('simpanan.data');
         Route::resource('simpanan', Admin\Simpanan\SimpananController::class);
         Route::get('permintaan-penarikan/{id}/status', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'changeStatus'])->name('permintaan-penarikan.ubah-status');
         Route::resource('permintaan-penarikan', Admin\Simpanan\PermintaanPenarikanSimpananController::class);

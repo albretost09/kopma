@@ -31,12 +31,25 @@ class KasController extends Controller
         $jumlahKeluar = Kas::where('jenis', 'Keluar')->sum('jumlah');
         $jumlahMasuk = Kas::where('jenis', 'Masuk')->sum('jumlah');
 
-        if (!empty($request->periode)) {
-            $kas->whereMonth('created_at', $request->periode);
+        if (!empty($request->bulan)) {
+            $kas->whereMonth('tanggal_transaksi', $request->bulan);
+            $saldoKas = (Kas::where('jenis', 'Masuk')->whereMonth('tanggal_transaksi', $request->bulan)->sum('jumlah') - Kas::where('jenis', 'Keluar')->whereMonth('tanggal_transaksi', $request->bulan)->sum('jumlah'));
+            $jumlahKeluar = Kas::where('jenis', 'Keluar')->whereMonth('tanggal_transaksi', $request->bulan)->sum('jumlah');
+            $jumlahMasuk = Kas::where('jenis', 'Masuk')->whereMonth('tanggal_transaksi', $request->bulan)->sum('jumlah');
+        }
+
+        if (!empty($request->tahun)) {
+            $kas->whereYear('tanggal_transaksi', $request->tahun);
+            $saldoKas = (Kas::where('jenis', 'Masuk')->whereYear('tanggal_transaksi', $request->tahun)->sum('jumlah') - Kas::where('jenis', 'Keluar')->whereYear('tanggal_transaksi', $request->tahun)->sum('jumlah'));
+            $jumlahKeluar = Kas::where('jenis', 'Keluar')->whereYear('tanggal_transaksi', $request->tahun)->sum('jumlah');
+            $jumlahMasuk = Kas::where('jenis', 'Masuk')->whereYear('tanggal_transaksi', $request->tahun)->sum('jumlah');
         }
 
         if (!empty($request->jenis_kas)) {
             $kas->where('jenis', $request->jenis_kas);
+            $saldoKas = (Kas::where('jenis', 'Masuk')->where('jenis', $request->jenis_kas)->sum('jumlah') - Kas::where('jenis', 'Keluar')->where('jenis', $request->jenis_kas)->sum('jumlah'));
+            $jumlahKeluar = Kas::where('jenis', 'Keluar')->where('jenis', $request->jenis_kas)->sum('jumlah');
+            $jumlahMasuk = Kas::where('jenis', 'Masuk')->where('jenis', $request->jenis_kas)->sum('jumlah');
         }
 
         $kas = $kas->latest()->get();

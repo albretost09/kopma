@@ -23,6 +23,19 @@ class SimpananController extends Controller
         return view('pages.admin.simpanan.index', compact('simpanan'));
     }
 
+    public function data(Request $request)
+    {
+        $simpanan = Simpanan::query();
+
+        if (!empty($request->jenis_simpanan)) {
+            $simpanan->where('jenis_simpanan', $request->jenis_simpanan);
+        }
+
+        $simpanan = $simpanan->latest()->get();
+
+        return view('pages.admin.simpanan.data', compact('simpanan'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
