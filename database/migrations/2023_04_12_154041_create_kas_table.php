@@ -24,7 +24,7 @@ class CreateKasTable extends Migration
             $table->timestamps();
         });
 
-        Kas::factory()->count(5)->create();
+        // Kas::factory()->count(5)->create();
     }
 
     /**

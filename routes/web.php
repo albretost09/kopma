@@ -77,6 +77,20 @@ Route::prefix('pengurus')->name('pengurus.')->group(
             });
 
             Route::get('riwayat-simpanan', [Pengurus\Simpanan\RiwayatSimpananController::class, 'index'])->name('riwayat-simpanan.index');
+
+            Route::get('laporan', [Pengurus\Laporan\LaporanController::class, 'index'])->name('laporan.index');
+            Route::prefix('laporan-shu')->name('laporan-shu.')->group(function () {
+                Route::get('cetak', [Pengurus\Laporan\LaporanSHUController::class, 'cetak'])->name('cetak');
+                Route::post('cetak-pdf', [Pengurus\Laporan\LaporanSHUController::class, 'cetakPDF'])->name('cetak-pdf');
+            });
+            Route::prefix('laporan-kas')->name('laporan-kas.')->group(function () {
+                Route::get('cetak', [Pengurus\Laporan\LaporanKasController::class, 'cetak'])->name('cetak');
+                Route::post('cetak-pdf', [Pengurus\Laporan\LaporanKasController::class, 'cetakPDF'])->name('cetak-pdf');
+            });
+            Route::prefix('laporan-simpanan')->name('laporan-simpanan.')->group(function () {
+                Route::get('cetak', [Pengurus\Laporan\LaporanSimpananController::class, 'cetak'])->name('cetak');
+                Route::post('cetak-pdf', [Pengurus\Laporan\LaporanSimpananController::class, 'cetakPDF'])->name('cetak-pdf');
+            });
         });
     }
 );
@@ -123,6 +137,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('laporan-shu')->name('laporan-shu.')->group(function () {
             Route::get('cetak', [Admin\Laporan\LaporanSHUController::class, 'cetak'])->name('cetak');
             Route::post('cetak-pdf', [Admin\Laporan\LaporanSHUController::class, 'cetakPDF'])->name('cetak-pdf');
+        });
+        Route::prefix('laporan-kas')->name('laporan-kas.')->group(function () {
+            Route::get('cetak', [Admin\Laporan\LaporanKasController::class, 'cetak'])->name('cetak');
+            Route::post('cetak-pdf', [Admin\Laporan\LaporanKasController::class, 'cetakPDF'])->name('cetak-pdf');
+        });
+        Route::prefix('laporan-simpanan')->name('laporan-simpanan.')->group(function () {
+            Route::get('cetak', [Admin\Laporan\LaporanSimpananController::class, 'cetak'])->name('cetak');
+            Route::post('cetak-pdf', [Admin\Laporan\LaporanSimpananController::class, 'cetakPDF'])->name('cetak-pdf');
         });
     });
 });

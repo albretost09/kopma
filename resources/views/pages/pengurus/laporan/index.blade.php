@@ -25,7 +25,7 @@
                         <div class="card-body text-center">
                             <i class="fa fa-file-pdf-o fa-4x"></i>
                             <h3 class="mt-3">Laporan Simpanan</h3>
-                            <a href="{{ route('admin.laporan-simpanan.cetak') }}" class="btn btn-primary">Cetak</a>
+                            <a href="{{ route('pengurus.laporan-simpanan.cetak') }}" class="btn btn-primary">Cetak</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <div class="card-body text-center">
                             <i class="fa fa-file-pdf-o fa-4x"></i>
                             <h3 class="mt-3">Laporan Kas</h3>
-                            <a href="{{ route('admin.laporan-kas.cetak') }}" class="btn btn-primary">Cetak</a>
+                            <a href="{{ route('pengurus.laporan-kas.cetak') }}" class="btn btn-primary">Cetak</a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         <div class="card-body text-center">
                             <i class="fa fa-file-pdf-o fa-4x"></i>
                             <h3 class="mt-3">Laporan SHU</h3>
-                            <a href="{{ route('admin.laporan-shu.cetak') }}" class="btn btn-primary">Cetak</a>
+                            <a href="{{ route('pengurus.laporan-shu.cetak') }}" class="btn btn-primary">Cetak</a>
                         </div>
                     </div>
                 </div>

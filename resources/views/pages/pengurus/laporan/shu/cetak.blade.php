@@ -10,7 +10,7 @@
                     <nav aria-label="breadcrumb" class="d-flex align-items-start">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href={{ route('admin.dashboard') }}>Home</a>
+                                <a href={{ route('pengurus.dashboard') }}>Home</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Laporan SHU</li>
                         </ol>
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('admin.laporan-simpanan.cetak-pdf') }}" method="post">
+            <form action="{{ route('pengurus.laporan-simpanan.cetak-pdf') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-10">

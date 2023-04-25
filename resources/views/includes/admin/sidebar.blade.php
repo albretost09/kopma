@@ -164,12 +164,12 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('anggota.tarik-simpanan*') ? 'class=active ' : '' }}
-                        href="{{ route('anggota.tarik-simpanan.index') }}">
+                    <a {{ request()->routeIs('pengurus.laporan*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.laporan.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="activity"></i>
                         </span>
-                        <span>Laporan<span>
+                        <span>Laporan</span>
                     </a>
                 </li>
             @else

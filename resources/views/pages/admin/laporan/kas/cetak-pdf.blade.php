@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan SHU {{ $data['tahun'] }}</title>
+    <title>Laporan Kas {{ $tahun }}</title>
     <style type="text/css">
         * {
             font-family: 'Times New Roman', Times, serif;
@@ -24,7 +24,7 @@
 
         .table-bordered th {
             border: 0.3pt solid #000 !important;
-            padding: 0.5pt !important;
+            padding: 2pt !important;
         }
 
         .font-18 {
@@ -52,15 +52,19 @@
             height: 1pt;
         }
 
+        .body {
+            font-size: 11pt;
+        }
+
         @include('prints.style')
     </style>
 </head>
 
 <body>
-    <section class="header-1 mb-5">
+    <section class="header-1 mb-3">
         <table class="w-100">
             <tr>
-                <td class="text-center">
+                <td class="text-right">
                     <img src="data:image/png;base64,{{ $logoUPR }}" alt="Logo" class="logo"
                         style="width: 90px; height: 90px; margin-right: 15px">
                 </td>
@@ -79,7 +83,7 @@
                         <span>Email/Laman : </span><i><a href="mailto:kopma@upr.ac.id">kopma@upr.ac.id</a></i>
                     </div>
                 </td>
-                <td class="text-center">
+                <td class="text-left">
                     <img src="data:image/png;base64,{{ $logoKOPMA }}" alt="Logo" class="logo"
                         style="width: 90px; height: 90px; margin-right: 15px">
                 </td>
@@ -92,76 +96,54 @@
         </table>
     </section>
 
-    <section class="header-2 mb-4">
-        <table style="width: 300px" class="mb-5">
-            <tr class="font-16 font-weight-bold">
-                <td colspan="3">
-                    <div class="mb-2">LAPORAN SHU</div>
-                </td>
-            </tr>
-            <tr class="font-14">
-                <td>Tahun</td>
-                <td>:</td>
-                <td>{{ $data['tahun'] }}</td>
-            </tr>
-            <tr class="font-14">
-                <td>Jumlah</td>
-                <td>:</td>
-                <td>{{ 'Rp. ' . number_format($data['jumlahSHU'], 0, ',', '.') }}</td>
-            </tr>
-        </table>
-
-
-        <table class="table table-bordered font-12">
-            <thead>
-                <tr class="text-center">
-                    <th>Kebijakan</th>
-                    <th>%</th>
-                    <th>Nominal</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($SHU as $item)
-                    <tr>
-                        <td>{{ $item->kebijakan }}</td>
-                        <td>{{ $item->persentase }}</td>
-                        <td>{{ 'Rp. ' . number_format($item->nominal, 0, ',', '.') }}</td>
-                    </tr>
-                @endforeach
-        </table>
-    </section>
-
     <section class="body mb-4">
+        <div class="font-weight-bold text-center mb-3">
+            <div>BUKU KAS UMUM</div>
+            <div>KOPMA UPR</div>
+        </div>
+
         <table class="table table-bordered">
             <thead>
                 <tr class="text-center">
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Simpanan</th>
-                    <th>Penerimaan SHU</th>
+                    <th>Tanggal</th>
+                    <th>Keterangan</th>
+                    <th>Masuk</th>
+                    <th>Keluar</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $totalSimpanan = 0;
-                    $totalSHU = 0;
+                    $totalMasuk = 0;
+                    $totalKeluar = 0;
                 @endphp
-                @foreach ($dataSHU as $item)
+                @foreach ($data as $item)
                     @php
-                        $totalSimpanan += $item['total_simpanan'];
-                        $totalSHU += $item['shu'];
+                        if ($item->jenis == 'Masuk') {
+                            $totalMasuk += $item->jumlah;
+                        } else {
+                            $totalKeluar += $item->jumlah;
+                        }
                     @endphp
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $item['nama'] }}</td>
-                        <td>{{ 'Rp. ' . number_format($item['total_simpanan'], 0, ',', '.') }}</td>
-                        <td>{{ 'Rp. ' . number_format($item['shu'], 0, ',', '.') }}</td>
+                        <td class="text-center">{{ $item->tanggal_transaksi->format('d F Y') }}</td>
+                        <td>{{ $item->keterangan }}</td>
+                        @if ($item->jenis == 'Masuk')
+                            <td>{{ 'Rp. ' . number_format($item->jumlah, 0, ',', '.') }}</td>
+                        @else
+                            <td></td>
+                        @endif
+                        @if ($item->jenis == 'Keluar')
+                            <td>{{ 'Rp. ' . number_format($item->jumlah, 0, ',', '.') }}</td>
+                        @else
+                            <td></td>
+                        @endif
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="2" class="text-center font-weight-bold">Total</td>
-                    <td class="font-weight-bold">{{ 'Rp. ' . number_format($totalSimpanan, 0, ',', '.') }}</td>
-                    <td class="font-weight-bold">{{ 'Rp. ' . number_format($totalSHU, 0, ',', '.') }}</td>
+                    <td colspan="3" class="text-center font-weight-bold">Jumlah Saldo</td>
+                    <td class="text-center font-weight-bold">
+                        {{ 'Rp. ' . number_format($totalMasuk - $totalKeluar, 0, ',', '.') }}</td>
+                    </td>
                 </tr>
             </tbody>
         </table>

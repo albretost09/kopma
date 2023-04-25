@@ -6,13 +6,13 @@
         <div class="content">
             <div class="page-header">
                 <div>
-                    <h3>Laporan SHU</h3>
+                    <h3>Laporan Simpanan</h3>
                     <nav aria-label="breadcrumb" class="d-flex align-items-start">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href={{ route('admin.dashboard') }}>Home</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Laporan SHU</li>
+                            <li class="breadcrumb-item active" aria-current="page">Laporan Simpanan</li>
                         </ol>
                     </nav>
                 </div>
