@@ -4,10 +4,10 @@
             <form action="{{ route('admin.pengurus.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="pengurus">Email</label>
+                    <label for="pengurus">Anggota</label>
                     <select class="form-select select2" multiple="multiple" id="pengurus" name="pengurus[]" required>
                         @foreach ($anggota as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama . ' - ' . $item->email }}</option>
+                            <option value="{{ $item->id }}">{{ $item->nama . ' - ' . $item->nim }}</option>
                         @endforeach
                     </select>
                 </div>

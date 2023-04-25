@@ -198,6 +198,8 @@
                 $('#modalTambahPengurus').on('show.bs.modal', function(e) {
                     var button = $(e.relatedTarget);
                     var modal = $(this);
+                    modal.find('.modal-body').addClass('d-none');
+                    modal.find('.modal-title').addClass('d-none');
                     modal.find('.modal-body').load(button.data("remote"));
                     modal.find('.modal-title').html(button.data("title"));
 
@@ -206,6 +208,9 @@
                             placeholder: 'Pilih Anggota',
                             allowClear: true,
                         });
+
+                        modal.find('.modal-body').removeClass('d-none');
+                        modal.find('.modal-title').removeClass('d-none');
                     }, 250);
                 });
 
