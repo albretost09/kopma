@@ -10,6 +10,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('backend/assets/media/image/favicon.png') }}" />
 
+    @stack('before-style')
+
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('backend/vendors/bundle.css') }}" type="text/css">
 
@@ -326,6 +328,8 @@
         <!-- ./ Content wrapper -->
     </div>
     <!-- ./ Layout wrapper -->
+
+    @stack('before-script')
 
     <!-- Main scripts -->
     <script src="{{ asset('backend/vendors/bundle.js') }}"></script>
