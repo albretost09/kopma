@@ -8,7 +8,26 @@
     </div>
     <div class="navigation-menu-body">
         <ul>
-            @if (auth('admin')->check())
+            @if (auth('admin')->user() && auth('admin')->user()->is_admin == false)
+                <li>
+                    <a {{ request()->routeIs('pengawas.dashboard') ? 'class=active ' : '' }}
+                        href="{{ route('pengawas.dashboard') }}">
+                        <span class="nav-link-icon">
+                            <i data-feather="pie-chart"></i>
+                        </span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a {{ request()->routeIs('pengawas.laporan*') ? 'class=active ' : '' }}
+                        href="{{ route('pengawas.laporan.index') }}">
+                        <span class="nav-link-icon">
+                            <i data-feather="activity"></i>
+                        </span>
+                        <span>Laporan</span>
+                    </a>
+                </li>
+            @elseif (auth('admin')->check())
                 <li>
                     <a {{ request()->routeIs('admin.dashboard') ? 'class=active ' : '' }}
                         href="{{ route('admin.dashboard') }}">

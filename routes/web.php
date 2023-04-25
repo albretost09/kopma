@@ -3,8 +3,8 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Anggota;
 use App\Http\Controllers\Pengurus;
+use App\Http\Controllers\Pengawas;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PDFController;
 
 Route::get('login', [Anggota\Auth\LoginController::class, 'index'])->name('login');
 Route::post('login', [Anggota\Auth\LoginController::class, 'authenticate'])->name('login');
@@ -149,5 +149,44 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
+// Pengawas
+Route::prefix('pengawas')->name('pengawas.')->group(
+    function () {
+        Route::get('login', [Pengawas\Auth\LoginController::class, 'index'])->name('login');
+        Route::post('login', [Pengawas\Auth\LoginController::class, 'authenticate'])->name('login');
+        Route::prefix('recovery-password')->name('recovery-password.')->group(function () {
+            Route::get('', [Pengawas\Auth\RecoverPasswordController::class, 'index'])->name('index');
+            Route::post('', [Pengawas\Auth\RecoverPasswordController::class, 'sendEmail'])->name('send-email');
+            Route::get('{token}', [Pengawas\Auth\RecoverPasswordController::class, 'reset'])->name('reset');
+            Route::post('{token}', [Pengawas\Auth\RecoverPasswordController::class, 'resetPassword'])->name('reset-password');
+        });
+
+        Route::middleware(['auth:admin', 'pengawas'])->group(
+            function () {
+                Route::get('', [Pengawas\Dashboard\DashboardController::class, 'index'])->name('dashboard');
+                Route::post('logout', [Pengawas\Auth\LoginController::class, 'logout'])->name('logout');
+                Route::prefix('profil')->name('profil.')->group(function () {
+                    Route::get('', [Pengawas\Profil\ProfilController::class, 'index'])->name('index');
+                    Route::put('ubah', Pengawas\Profil\UbahProfilController::class)->name('ubah-profil');
+                    Route::put('ubah-password', Pengawas\Profil\UbahPasswordController::class)->name('ubah-password');
+                });
+
+                Route::get('laporan', [Pengawas\Laporan\LaporanController::class, 'index'])->name('laporan.index');
+                Route::prefix('laporan-shu')->name('laporan-shu.')->group(function () {
+                    Route::get('cetak', [Pengawas\Laporan\LaporanSHUController::class, 'cetak'])->name('cetak');
+                    Route::post('cetak-pdf', [Pengawas\Laporan\LaporanSHUController::class, 'cetakPDF'])->name('cetak-pdf');
+                });
+                Route::prefix('laporan-kas')->name('laporan-kas.')->group(function () {
+                    Route::get('cetak', [Pengawas\Laporan\LaporanKasController::class, 'cetak'])->name('cetak');
+                    Route::post('cetak-pdf', [Pengawas\Laporan\LaporanKasController::class, 'cetakPDF'])->name('cetak-pdf');
+                });
+                Route::prefix('laporan-simpanan')->name('laporan-simpanan.')->group(function () {
+                    Route::get('cetak', [Pengawas\Laporan\LaporanSimpananController::class, 'cetak'])->name('cetak');
+                    Route::post('cetak-pdf', [Pengawas\Laporan\LaporanSimpananController::class, 'cetakPDF'])->name('cetak-pdf');
+                });
+            }
+        );
+    }
+);
 
 Route::view('/', 'layouts.front');

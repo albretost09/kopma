@@ -33,6 +33,8 @@ class CreateAdminTable extends Migration
             'password' => bcrypt('password'),
             'is_admin' => true,
         ]);
+
+        Admin::factory()->count(2)->create();
     }
 
     /**

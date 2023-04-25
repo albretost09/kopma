@@ -21,7 +21,30 @@
 
                     <div class="header-body-right">
                         <ul class="navbar-nav">
-                            @if (auth('admin')->check())
+                            @if (auth('admin')->user() && auth('admin')->user()->is_admin == false)
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" title="User menu"
+                                        data-toggle="dropdown">
+                                        <span class="ml-2 d-sm-inline d-none">{{ auth('admin')->user()->nama }}</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
+                                        <div class="text-center py-4">
+                                            <h5 class="text-center">{{ auth('admin')->user()->nama }}</h5>
+                                            <div class="mb-3 small text-center text-muted">Pengawas</div>
+                                            <a href="{{ route('pengawas.profil.index') }}"
+                                                class="btn btn-outline-light btn-rounded">Manage Your
+                                                Account</a>
+                                        </div>
+                                        <div class="list-group text-center">
+                                            <form action="{{ route('pengawas.logout') }}" method="post">
+                                                @csrf
+                                                <a href="#" class="list-group-item text-danger"
+                                                    onclick="$(this).closest('form').submit();">Sign Out!</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            @elseif (auth('admin')->check())
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" title="User menu"
                                         data-toggle="dropdown">
