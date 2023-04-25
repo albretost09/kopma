@@ -45,6 +45,7 @@ class PengawasController extends Controller
         $request->validate([
             'nama' => 'required',
             'nik' => 'required|unique:admin,nik',
+            'email' => 'required|unique:admin,email',
             'username' => 'required|unique:admin,username',
             'password' => 'required|confirmed',
         ]);
@@ -56,6 +57,7 @@ class PengawasController extends Controller
         $result = Admin::create([
             'nama' => $request->nama,
             'nik' => $request->nik,
+            'email' => $request->email,
             'username' => $request->username,
             'password' => bcrypt($request->password),
         ]);
@@ -105,6 +107,7 @@ class PengawasController extends Controller
         $request->validate([
             'nama' => 'required',
             'nik' => 'required|unique:admin,nik,' . $pengawas->id,
+            'email' => 'required|unique:admin,email,' . $pengawas->id,
             'username' => 'required|unique:admin,username,' . $pengawas->id,
             'password' => 'nullable|confirmed',
         ]);
