@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\Anggota;
 use App\Http\Controllers\Pengurus;
-use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 
 Route::get('login', [Anggota\Auth\LoginController::class, 'index'])->name('login');
 Route::post('login', [Anggota\Auth\LoginController::class, 'authenticate'])->name('login');
@@ -119,6 +120,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('', [Admin\SHU\PembagianSHUController::class, 'index'])->name('index');
             Route::post('', [Admin\SHU\PembagianSHUController::class, 'store'])->name('store');
         });
+
+        Route::get('laporan', [Admin\Laporan\LaporanController::class, 'index'])->name('laporan.index');
+        Route::post('laporan-shu', [PDFController::class, 'createPDF'])->name('laporan-shu');
     });
 });
 
