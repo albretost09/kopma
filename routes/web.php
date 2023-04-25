@@ -122,7 +122,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::get('laporan', [Admin\Laporan\LaporanController::class, 'index'])->name('laporan.index');
-        Route::post('laporan-shu', [PDFController::class, 'createPDF'])->name('laporan-shu');
+        Route::prefix('laporan-shu')->name('laporan-shu.')->group(function () {
+            Route::get('cetak', [Admin\Laporan\LaporanSHUController::class, 'cetak'])->name('cetak');
+            // Route::get('cetak-pdf', [Admin\Laporan\LaporanSHUController::class, 'cetakPDF'])->name('cetak-pdf');
+        });
     });
 });
 

@@ -43,10 +43,7 @@
                         <div class="card-body text-center">
                             <i class="fa fa-file-pdf-o fa-4x"></i>
                             <h3 class="mt-3">Laporan SHU</h3>
-                            <form action="{{ route('admin.laporan-shu') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Cetak</button>
-                            </form>
+                            <a href="{{ route('admin.laporan-shu.cetak') }}" class="btn btn-primary">Cetak</a>
                         </div>
                     </div>
                 </div>
