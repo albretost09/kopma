@@ -67,11 +67,9 @@ Route::prefix('pengurus')->name('pengurus.')->group(
             Route::get('anggota/{id}/status', [Pengurus\AnggotaController::class, 'status'])->name('anggota.status');
             Route::put('anggota/{id}/status', [Pengurus\AnggotaController::class, 'ubahStatus'])->name('anggota.ubah-status');
             Route::resource('anggota', Pengurus\AnggotaController::class);
-            Route::get('pengurus/{id}/status', [Pengurus\PengurusController::class, 'status'])->name('pengurus.status');
-            Route::put('pengurus/{id}/status', [Pengurus\PengurusController::class, 'ubahStatus'])->name('pengurus.ubah-status');
-            Route::resource('pengurus', Pengurus\PengurusController::class);
             Route::get('kas/data', [Pengurus\KasController::class, 'data'])->name('kas.data');
             Route::resource('kas', Pengurus\KasController::class);
+            Route::resource('simpanan', Pengurus\Simpanan\SimpananController::class);
 
             Route::prefix('setor-simpanan')->name('setor-simpanan.')->group(function () {
                 Route::get('', [Pengurus\Simpanan\SetorSimpananController::class, 'index'])->name('index');

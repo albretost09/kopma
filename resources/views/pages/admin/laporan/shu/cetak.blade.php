@@ -25,6 +25,9 @@
                         <div class="form-group">
                             <input type="number" class="form-control" name="tahun" id="tahun" min="1901"
                                 max="2099" placeholder="{{ date('Y') }}" />
+                            @if ($errors->has('tahun'))
+                                <span class="text-danger">Tahun tidak boleh kosong</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-2">

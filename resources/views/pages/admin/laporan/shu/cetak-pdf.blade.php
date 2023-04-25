@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Laporan SHU {{ $data['tahun'] }}</title>
     <style type="text/css">
         * {
             font-family: 'Times New Roman', Times, serif;
@@ -18,12 +18,12 @@
         }
 
         .table-bordered td {
-            border: 1px solid #000 !important;
+            border: 0.3pt solid #000 !important;
             padding: 3pt !important;
         }
 
         .table-bordered th {
-            border: 1px solid #000 !important;
+            border: 0.3pt solid #000 !important;
             padding: 0.5pt !important;
         }
 
@@ -58,27 +58,37 @@
 
 <body>
     <section class="header-1 mb-5">
-        <table>
-            <td>
-                <img src="data:image/png;base64,{{ $logoUPR }}" alt="Logo" class="logo"
-                    style="width: 90px; height: 90px; margin-right: 15px">
-            </td>
-            <td>
-                <div class="row text-center font-16">
-                    <div>KEMENTERIAN PENDIDIKAN</div>
-                    <div>KEBUDAYAAN, RISET, DAN TEKNOLOGI</div>
-                    <div>UNIVERSITAS PALANGKA RAYA</div>
-                </div>
-                <div class="row text-center font-16">
-                    <div class="font-weight-bold">KOPERASI MAHASISWA</div>
-                </div>
-                <div class="row text-center font-12">
-                    <div>Alamat : Jl. Hendrik Timang</div>
-                    <div>Telepon: <i>0812-1806-9394/0821-1676-1662</div></i>
-                    <span>Email/Laman : </span><i><a href="mailto:kopma@upr.ac.id">kopma@upr.ac.id</a></i>
-                </div>
-                <hr class="line">
-            </td>
+        <table class="w-100">
+            <tr>
+                <td class="text-center">
+                    <img src="data:image/png;base64,{{ $logoUPR }}" alt="Logo" class="logo"
+                        style="width: 90px; height: 90px; margin-right: 15px">
+                </td>
+                <td>
+                    <div class="row text-center font-16">
+                        <div>KEMENTERIAN PENDIDIKAN</div>
+                        <div>KEBUDAYAAN, RISET, DAN TEKNOLOGI</div>
+                        <div>UNIVERSITAS PALANGKA RAYA</div>
+                    </div>
+                    <div class="row text-center font-16">
+                        <div class="font-weight-bold">KOPERASI MAHASISWA</div>
+                    </div>
+                    <div class="row text-center font-12">
+                        <div>Alamat : Jl. Hendrik Timang</div>
+                        <div>Telepon: <i>0812-1806-9394/0821-1676-1662</div></i>
+                        <span>Email/Laman : </span><i><a href="mailto:kopma@upr.ac.id">kopma@upr.ac.id</a></i>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <img src="data:image/png;base64,{{ $logoKOPMA }}" alt="Logo" class="logo"
+                        style="width: 90px; height: 90px; margin-right: 15px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <hr class="line">
+                </td>
+            </tr>
         </table>
     </section>
 
@@ -115,7 +125,7 @@
                     <tr>
                         <td>{{ $item->kebijakan }}</td>
                         <td>{{ $item->persentase }}</td>
-                        <td>{{ $item->nominal }}</td>
+                        <td>{{ 'Rp. ' . number_format($item->nominal, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
         </table>

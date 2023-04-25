@@ -57,11 +57,11 @@ class LaporanSHUController extends Controller
             'jumlahSHU' => (Kas::where('jenis', 'Masuk')->sum('jumlah') - Kas::where('jenis', 'Keluar')->sum('jumlah')),
         ];
 
-        $logoUPR = public_path('backend/assets/media/image/logo-upr.png');
-        dd($logoUPR);
+        $logoUPR = base64_encode(file_get_contents(public_path(('backend/assets/media/image/logo-upr.png'))));
+        $logoKOPMA = base64_encode(file_get_contents(public_path(('backend/assets/media/image/logo-kopma.png'))));
 
         $pdf = app('dompdf.wrapper');
-        $pdf = $pdf->loadView('pages.admin.laporan.shu.cetak-pdf', compact('SHU', 'data', 'dataSHU', 'logoUPR'));
-        return $pdf->stream('laporan-shu.pdf');
+        $pdf = $pdf->loadView('pages.admin.laporan.shu.cetak-pdf', compact('SHU', 'data', 'dataSHU', 'logoUPR', 'logoKOPMA'));
+        return $pdf->stream("laporan-shu-$tahun.pdf");
     }
 }

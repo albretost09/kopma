@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Simpanan;
+namespace App\Http\Controllers\Pengurus\Simpanan;
 
 use App\Models\Simpanan;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class SimpananController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.admin.simpanan.index', compact('simpanan'));
+        return view('pages.pengurus.simpanan.index', compact('simpanan'));
     }
 
     /**

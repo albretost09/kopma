@@ -119,21 +119,21 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('pengurus.pengurus*') ? 'class=active ' : '' }}
-                        href="{{ route('pengurus.pengurus.index') }}">
-                        <span class="nav-link-icon">
-                            <i data-feather="user"></i>
-                        </span>
-                        <span>Pengurus</span>
-                    </a>
-                </li>
-                <li>
                     <a {{ request()->routeIs('pengurus.kas*') ? 'class=active ' : '' }}
                         href="{{ route('pengurus.kas.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="dollar-sign"></i>
                         </span>
                         <span>Kelola Kas</span>
+                    </a>
+                </li>
+                <li>
+                    <a {{ request()->routeIs('pengurus.simpanan*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.simpanan.index') }}">
+                        <span class="nav-link-icon">
+                            <i data-feather="dollar-sign"></i>
+                        </span>
+                        <span>Simpanan</span>
                     </a>
                 </li>
                 <li>
@@ -161,6 +161,15 @@
                             <i data-feather="dollar-sign"></i>
                         </span>
                         <span>Tarik Simpanan</span>
+                    </a>
+                </li>
+                <li>
+                    <a {{ request()->routeIs('anggota.tarik-simpanan*') ? 'class=active ' : '' }}
+                        href="{{ route('anggota.tarik-simpanan.index') }}">
+                        <span class="nav-link-icon">
+                            <i data-feather="activity"></i>
+                        </span>
+                        <span>Laporan<span>
                     </a>
                 </li>
             @else
