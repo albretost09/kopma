@@ -211,7 +211,7 @@
 
                         modal.find('.modal-body').removeClass('d-none');
                         modal.find('.modal-title').removeClass('d-none');
-                    }, 250);
+                    }, 1000);
                 });
 
                 $('#myModal').on('show.bs.modal', function(e) {
