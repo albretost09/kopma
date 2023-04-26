@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Home One || Migrate || Immigration Service Responsive HTML 5 Template</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,13 @@
         .header-style-one {
             padding-top: 0px !important;
         }
+
+        .footer {
+            padding: 90px 0 70px !important;
+        }
     </style>
+
+    @stack('style')
 </head>
 
 <body>
@@ -133,25 +139,25 @@
         @include('includes.slider')
         <!-- End Main Slider -->
 
-        <!--Start Layanan Kopma -->
-        @include('includes.layanan')
-        <!--End Layanan Kopma -->
+        <!--Start Tentang Kami -->
+        @include('includes.tentang-kopma')
+        <!--End Tentang Kami -->
 
-        <!--Start Pengumuman-->
-        @include('includes.pengumuman')
-        <!--End Pengumuman-->
+        <!--Start Visi Misi -->
+        @include('includes.visi-kopma')
+        <!--End Visi Misi -->
 
-        <!--Start Registrasi-->
-        @include('includes.registrasi')
-        <!--End Registrasi-->
+        <!--Start Keuntungan Bergabung-->
+        @include('includes.keuntungan-kopma')
+        <!--End Keuntungan Bergabung-->
 
-        <!--Start Tentang-->
-        @include('includes.tentang')
-        <!--End Tentang-->
+        <!--Start Layanan Kami -->
+        @include('includes.layanan-kopma')
+        <!--End Layanan Kami -->
 
-        <!--Start Blog-->
-        @include('includes.blog')
-        <!--End Blog-->
+        <!--Start Kontak-->
+        @include('includes.kontak-kopma')
+        <!--End Kontak-->
 
         <!--Start footer area-->
         @include('includes.footer')
