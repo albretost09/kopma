@@ -12,15 +12,12 @@ class UbahProfilController extends Controller
         $request->validate([
             'nama' => 'required',
             'username' => 'required',
+            'email' => 'required|email',
             'nik' => 'nullable|numeric|digits:16',
         ]);
 
         $user = auth()->user();
-        $result = $user->update([
-            'nama' => $request->nama,
-            'username' => $request->username,
-            'nik' => $request->nik,
-        ]);
+        $result = $user->update($request->only('nama', 'username', 'email', 'nik'));
 
         if ($result) {
             return redirect()->route('pengawas.profil.index')->with('success', 'Profil berhasil diubah.');

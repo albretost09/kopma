@@ -66,6 +66,15 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input type="email" class="form-control" name="email"
+                                                                value="{{ auth()->user()->email }}">
+                                                            @if ($errors->has('email'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('email') }}</span>
+                                                            @endif
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label>NIK</label>
                                                             <input type="number" class="form-control" name="nik"
                                                                 value="{{ auth()->user()->nik }}">
