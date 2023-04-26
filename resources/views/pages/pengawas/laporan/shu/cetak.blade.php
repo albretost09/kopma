@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('pengawas.laporan-simpanan.cetak-pdf') }}" method="post">
+            <form action="{{ route('pengawas.laporan-shu.cetak-pdf') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-10">
