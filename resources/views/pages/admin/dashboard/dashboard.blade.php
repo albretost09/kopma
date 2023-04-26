@@ -67,31 +67,23 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="card">
-                        <div class="card-body text-center">
-                            <h6 class="card-title mb-2 text-center">Kas Tahun {{ date('Y') }}</h6>
-                            <hr>
-                            <div class="font-size-40 font-weight-bold">
-                                {{ 'Rp. ' . number_format($kasTahunIni, 0, ',', '.') }}</div>
-                            <hr>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <p class="text-muted mb-1">Pemasukan</p>
-                                    <div>
-                                        <span
-                                            class="font-weight-bold">{{ 'Rp. ' . number_format($pemasukanTahunIni, 0, ',', '.') }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="text-muted mb-1">Pengeluaran</p>
-                                    <div>
-                                        <span
-                                            class="font-weight-bold">{{ 'Rp. ' . number_format($pengeluaranTahunIni, 0, ',', '.') }}</span>
-                                    </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center mb-4">
+                                <div>
+                                    <h6 class="card-title text-center mb-1">Kas Tahun Ini</h6>
                                 </div>
                             </div>
                             <div id="kas-chart"></div>
+                            <ul class="list-inline text-center">
+                                <li class="list-inline-item">
+                                    <i class="fa fa-circle mr-1 text-success"></i> Pemasukan <br>
+                                </li>
+                                <li class="list-inline-item">
+                                    <i class="fa fa-circle mr-1 text-danger"></i> Pengeluaran <br>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -103,6 +95,14 @@
         @include('includes.admin.footer')
     </div>
 @endsection
+
+@push('style')
+    <style>
+        .apexcharts-datalabel-value {
+            font-size: 11pt !important;
+        }
+    </style>
+@endpush
 
 @push('script')
     <script>
@@ -126,23 +126,17 @@
         $(function() {
             var colors = {
                 primary: $('.colors .bg-primary').css('background-color').replace('rgb', '').replace(')', '')
-                    .replace('(',
-                        '').split(','),
+                    .replace('(', '').split(','),
                 secondary: $('.colors .bg-secondary').css('background-color').replace('rgb', '').replace(')',
-                    '').replace(
-                    '(', '').split(','),
+                    '').replace('(', '').split(','),
                 info: $('.colors .bg-info').css('background-color').replace('rgb', '').replace(')', '').replace(
-                        '(', '')
-                    .split(','),
+                    '(', '').split(','),
                 success: $('.colors .bg-success').css('background-color').replace('rgb', '').replace(')', '')
-                    .replace('(',
-                        '').split(','),
+                    .replace('(', '').split(','),
                 danger: $('.colors .bg-danger').css('background-color').replace('rgb', '').replace(')', '')
-                    .replace('(', '')
-                    .split(','),
+                    .replace('(', '').split(','),
                 warning: $('.colors .bg-warning').css('background-color').replace('rgb', '').replace(')', '')
-                    .replace('(',
-                        '').split(','),
+                    .replace('(', '').split(','),
             };
 
             var rgbToHex = function(rgb) {
@@ -167,82 +161,60 @@
             colors.danger = '#' + fullColorHex(colors.danger[0], colors.danger[1], colors.danger[2]);
             colors.warning = '#' + fullColorHex(colors.warning[0], colors.warning[1], colors.warning[2]);
 
-            function activityChart() {
-                if ($("#kas-chart").length) {
-                    var options = {
-                        chart: {
-                            type: "bar",
-                            fontFamily: "Inter",
-                            toolbar: {
-                                show: false,
-                            },
-                        },
-                        series: [{
-                                name: "Pemasukan",
-                                data: {{ json_encode($dataChart['pemasukan']) }},
-                            },
-                            {
-                                name: "Pengeluaran",
-                                data: {{ json_encode($dataChart['pengeluaran']) }},
-                            },
-                        ],
-                        colors: [colors.secondary, colors.info],
-                        plotOptions: {
-                            bar: {
-                                horizontal: false,
-                                columnWidth: "50%",
-                                endingShape: "rounded",
-                            },
-                        },
-                        dataLabels: {
-                            enabled: false,
-                        },
-                        stroke: {
-                            show: true,
-                            width: 8,
-                            colors: ["transparent"],
-                        },
-                        grid: {
-                            show: false,
-                            padding: {
-                                left: 0,
-                                right: 0,
-                            },
-                        },
-                        xaxis: {
-                            labels: {
-                                show: false,
-                            },
-                            axisBorder: {
-                                show: false,
-                            },
-                            // categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-                        },
-                        yaxis: {
-                            show: false,
-                        },
-                        fill: {
-                            opacity: 1,
-                        },
-                        legend: {
-                            show: false,
-                        },
-                    };
-
-                    if ($(window).width() > 992) {
-                        options.chart.height = 395;
+            function kasChart() {
+                var options = {
+                    series: [{{ $dataChart['pengeluaran'] }}, {{ $dataChart['pemasukan'] }}],
+                    chart: {
+                        type: 'donut',
+                        // fontFamily: chartFontStyle,
+                    },
+                    labels: ['Pengeluaran', 'Pemasukan'],
+                    colors: [colors.danger, colors.success],
+                    track: {
+                        background: "#cccccc"
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        colors: [colors.danger, colors.success],
+                    },
+                    plotOptions: {
+                        pie: {
+                            expandOnClick: true,
+                            donut: {
+                                labels: {
+                                    show: true,
+                                    value: {
+                                        formatter: function(val) {
+                                            const n = Number(val);
+                                            return 'Rp. ' + n.toLocaleString('id-ID');
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    tooltip: {
+                        shared: false,
+                        y: {
+                            formatter: function(val) {
+                                const n = Number(val);
+                                return 'Rp. ' + n.toLocaleString('id-ID');
+                            }
+                        }
+                    },
+                    legend: {
+                        show: false
                     }
+                };
 
-                    var chart = new ApexCharts(
-                        document.querySelector("#kas-chart"),
-                        options
-                    );
+                var chart = new ApexCharts(document.querySelector("#kas-chart"), options);
 
-                    chart.render();
-                }
+                chart.render();
             }
 
-            activityChart();
+            kasChart();
         });
     </script>
 @endpush

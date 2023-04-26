@@ -17,14 +17,11 @@ class DashboardController extends Controller
         $kasKopma = (Kas::where('jenis', 'Masuk')->sum('jumlah') - Kas::where('jenis', 'Keluar')->where('keterangan', 'NOT LIKE', "%SHU Anggota Koperasi Tahun%")->sum('jumlah')) ?? 0;
         $totalSimpanan = Simpanan::where('jenis_simpanan', '!=', 'SHU')->sum('jumlah') ?? 0;
         $kasTahunIni = (Kas::where('jenis', 'Masuk')->whereYear('tanggal_transaksi', date('Y'))->sum('jumlah') - Kas::where('jenis', 'Keluar')->whereYear('tanggal_transaksi', date('Y'))->sum('jumlah')) ?? 0;
-        $pemasukanTahunIni = Kas::where('jenis', 'Masuk')->whereYear('tanggal_transaksi', date('Y'))->sum('jumlah') ?? 0;
-        $pengeluaranTahunIni = Kas::where('jenis', 'Keluar')->whereYear('tanggal_transaksi', date('Y'))->sum('jumlah') ?? 0;
-
         $dataChart = [
-            'pemasukan' => Kas::where('jenis', 'Masuk')->orderBy('tanggal_transaksi', 'DESC')->take(9)->pluck('jumlah')->toArray(),
-            'pengeluaran' => Kas::where('jenis', 'Keluar')->orderBy('tanggal_transaksi', 'DESC')->take(9)->pluck('jumlah')->toArray(),
+            'pemasukan' => Kas::where('jenis', 'Masuk')->whereYear('tanggal_transaksi', date('Y'))->sum('jumlah') ?? 0,
+            'pengeluaran' => Kas::where('jenis', 'Keluar')->whereYear('tanggal_transaksi', date('Y'))->sum('jumlah') ?? 0,
         ];
 
-        return view('pages.admin.dashboard.dashboard', compact('jumlahAnggota', 'kasKopma', 'totalSimpanan', 'kasTahunIni', 'pemasukanTahunIni', 'pengeluaranTahunIni', 'dataChart'));
+        return view('pages.admin.dashboard.dashboard', compact('jumlahAnggota', 'kasKopma', 'totalSimpanan', 'kasTahunIni', 'dataChart'));
     }
 }
