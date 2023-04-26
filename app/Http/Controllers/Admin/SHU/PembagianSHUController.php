@@ -15,7 +15,7 @@ class PembagianSHUController extends Controller
 {
     public function index()
     {
-        $jumlahSHU = (Kas::where('jenis', 'Masuk')->sum('jumlah') - Kas::where('jenis', 'Keluar')->sum('jumlah'));
+        $jumlahSHU = (Kas::where('jenis', 'Masuk')->sum('jumlah') - Kas::where('jenis', 'Keluar')->where('keterangan', 'NOT LIKE', "%SHU Anggota Koperasi Tahun%")->sum('jumlah'));
 
         $anggota = Pengguna::query()
             ->where('status', 'AKTIF')
