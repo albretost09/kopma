@@ -100,6 +100,11 @@
         <div class="font-weight-bold text-center mb-3">
             <div>BUKU KAS UMUM</div>
             <div>KOPMA UPR</div>
+            @if (empty($bulan))
+                <div>Tahun: {{ $tahun }}</div>
+            @else
+                <div>Bulan: {{ $bulan }} {{ $tahun }}</div>
+            @endif
         </div>
 
         <table class="table table-bordered">
