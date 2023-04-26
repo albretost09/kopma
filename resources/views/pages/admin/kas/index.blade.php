@@ -42,7 +42,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Tahun</label>
-                                <input type="number" class="form-control" name="tahun" min="1901" max="2099" />
+                                <input type="number" class="form-control" id="tahun" name="tahun" min="1901"
+                                    max="2099" />
                             </div>
                             <div class="form-group">
                                 <label>Jenis Kas</label>
