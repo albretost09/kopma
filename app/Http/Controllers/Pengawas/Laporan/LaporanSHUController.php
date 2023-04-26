@@ -54,7 +54,7 @@ class LaporanSHUController extends Controller
 
         $data = [
             'tahun' => $tahun,
-            'jumlahSHU' => (Kas::where('jenis', 'Masuk')->sum('jumlah') - Kas::where('jenis', 'Keluar')->sum('jumlah')),
+            'jumlahSHU' => (Kas::where('jenis', 'Masuk')->sum('jumlah') - Kas::where('jenis', 'Keluar')->where('keterangan', 'NOT LIKE', "%SHU Anggota Koperasi Tahun%")->sum('jumlah')),
         ];
 
         $logoUPR = base64_encode(file_get_contents(public_path(('backend/assets/media/image/logo-upr.png'))));
