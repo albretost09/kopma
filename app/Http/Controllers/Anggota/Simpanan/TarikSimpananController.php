@@ -44,6 +44,8 @@ class TarikSimpananController extends Controller
         $request->validate([
             'jenis_transaksi' => 'required|in:Tunai,Transfer',
             'jumlah_penarikan' => 'required|numeric',
+            'bank_tujuan' => 'required_if:jenis_transaksi,Transfer',
+            'nomor_rekening' => 'required_if:jenis_transaksi,Transfer',
         ]);
 
         $jumlah_tarik = $request->jumlah_penarikan;
@@ -90,6 +92,8 @@ class TarikSimpananController extends Controller
                         $riwayat_simpanan->simpanan_id = $simpanan->id;
                         $riwayat_simpanan->jenis_transaksi = $jenis_transaksi;
                         $riwayat_simpanan->jumlah_penarikan = $jumlah_tarik;
+                        $riwayat_simpanan->bank_tujuan = $jenis_transaksi == 'Transfer' ? request()->bank_tujuan : null;
+                        $riwayat_simpanan->nomor_rekening = $jenis_transaksi == 'Transfer' ? request()->nomor_rekening : null;
                         $riwayat_simpanan->save();
 
                         $simpanan->jumlah -= $jumlah_tarik;
@@ -100,6 +104,8 @@ class TarikSimpananController extends Controller
                         $riwayat_simpanan->simpanan_id = $simpanan->id;
                         $riwayat_simpanan->jenis_transaksi = $jenis_transaksi;
                         $riwayat_simpanan->jumlah_penarikan = $simpanan->jumlah;
+                        $riwayat_simpanan->bank_tujuan = $jenis_transaksi == 'Transfer' ? request()->bank_tujuan : null;
+                        $riwayat_simpanan->nomor_rekening = $jenis_transaksi == 'Transfer' ? request()->nomor_rekening : null;
                         $riwayat_simpanan->save();
 
                         $jumlah_tarik -= $simpanan->jumlah;
