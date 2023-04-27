@@ -7,6 +7,8 @@
             <li><a href="#keuntungan">Keuntungan Bergabung</a></li>
             <li><a href="#layanan">Layanan Kami</a></li>
             <li><a href="#kontak">Kontak</a></li>
+            <li><a href="{{ route('login') }}">Login</a></li>
+            <li><a href="{{ route('register.store') }}">Register</a></li>
         </ul>
     </div>
 </nav>

@@ -48,6 +48,7 @@ class TarikSimpananController extends Controller
 
         $jumlah_tarik = $request->jumlah_penarikan;
         $jumlah_tarik = str_replace('.', '', $jumlah_tarik);
+        $jenis_transaksi = $request->jenis_transaksi;
         $simpanan = Simpanan::query()
             ->where('pengguna_id', auth()->user()->id)
             ->where('jenis_simpanan', 'Sukarela')
@@ -78,7 +79,7 @@ class TarikSimpananController extends Controller
 
         $simpanans = $simpanan->get();
 
-        DB::transaction(function () use ($simpanans, $jumlah_tarik) {
+        DB::transaction(function () use ($simpanans, $jumlah_tarik, $jenis_transaksi) {
             try {
                 foreach ($simpanans as $simpanan) {
                     if ($jumlah_tarik <= 0) {
@@ -87,7 +88,7 @@ class TarikSimpananController extends Controller
                     if ($simpanan->jumlah >= $jumlah_tarik) {
                         $riwayat_simpanan = new RiwayatPenarikan();
                         $riwayat_simpanan->simpanan_id = $simpanan->id;
-                        $riwayat_simpanan->jenis_transaksi = 'Tunai';
+                        $riwayat_simpanan->jenis_transaksi = $jenis_transaksi;
                         $riwayat_simpanan->jumlah_penarikan = $jumlah_tarik;
                         $riwayat_simpanan->save();
 
@@ -97,7 +98,7 @@ class TarikSimpananController extends Controller
                     } else {
                         $riwayat_simpanan = new RiwayatPenarikan();
                         $riwayat_simpanan->simpanan_id = $simpanan->id;
-                        $riwayat_simpanan->jenis_transaksi = 'Tunai';
+                        $riwayat_simpanan->jenis_transaksi = $jenis_transaksi;
                         $riwayat_simpanan->jumlah_penarikan = $simpanan->jumlah;
                         $riwayat_simpanan->save();
 
