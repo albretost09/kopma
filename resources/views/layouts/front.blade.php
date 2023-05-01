@@ -48,7 +48,7 @@
             padding: 90px 0 70px !important;
         }
 
-        .main-slider .slide .image-layer {
+        #slide-dua {
             background-size: cover !important;
             background-position: center top !important;
         }

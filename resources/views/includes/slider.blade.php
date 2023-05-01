@@ -10,7 +10,7 @@
             </div>
             <!-- Slide -->
             <div class="slide">
-                <div class="image-layer"
+                <div class="image-layer" id="slide-dua"
                     style="background-image:url({{ asset('frontend/assets/images/slides/kopma-2.jpg') }})">
                 </div>
             </div>
