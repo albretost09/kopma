@@ -3,9 +3,9 @@
         <ul class="navigation clearfix">
             <li><a href="#home">Home</a></li>
             <li><a href="#tentang-kami">Tentang Kami</a></li>
+            <li><a href="#visi">Visi Misi</a></li>
             <li class="dropdown"><a href="#">Layanan</a>
                 <ul>
-                    <li><a href="#visi">Visi Misi</a></li>
                     <li><a href="#keuntungan">Keuntungan Bergabung</a></li>
                     <li><a href="#layanan">Layanan Kami</a></li>
                     <li><a href="#usaha">Usaha Kopma</a></li>
