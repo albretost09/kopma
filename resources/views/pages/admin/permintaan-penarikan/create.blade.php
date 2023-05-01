@@ -42,10 +42,10 @@
                                                     <li class="nav-item w-100 text-center">
                                                         <label class="nav-link active" id="transfer-tab" data-toggle="pill"
                                                             role="tab" aria-controls="transfer"
-                                                            aria-selected="false">Transfer</label>
+                                                            aria-selected="false">Tunai</label>
                                                     </li>
                                                 </ul>
-                                                <input type="hidden" name="jenis_transaksi" value="Transfer">
+                                                <input type="hidden" name="jenis_transaksi" value="Tunai">
                                                 <div class="form-group row">
                                                     <label for="pengguna_id" class="col-sm-2 col-form-label">Anggota</label>
                                                     <div class="col-sm-10">
@@ -62,18 +62,6 @@
                                                     <label class="col-sm-2 col-form-label">Jumlah</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="jumlah_penarikan" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row transfer">
-                                                    <label class="col-sm-2 col-form-label">Bank Tujuan</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" name="bank_tujuan" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row transfer">
-                                                    <label class="col-sm-2 col-form-label">No. Rekening</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" name="nomor_rekening" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
