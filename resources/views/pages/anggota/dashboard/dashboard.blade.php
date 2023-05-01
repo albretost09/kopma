@@ -11,6 +11,22 @@
                 </div>
             </div>
 
+            @if ($statusAnggota == 'NONAKTIF')
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning">
+                            <i data-feather="alert-circle"></i>
+                            Untuk mengaktifkan keanggotaan anda, silahkan melakukan pembayaran simpanan pokok.
+                            <div class="mt-2">
+                                <a href="{{ route('anggota.setor-simpanan.index') }}"
+                                    class="btn btn-primary btn-sm ml-4">Bayar
+                                    Simpanan Pokok</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">

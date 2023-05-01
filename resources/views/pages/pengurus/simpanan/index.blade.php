@@ -53,6 +53,7 @@
                                                 <th>Jumlah</th>
                                                 <th>Jenis Simpanan</th>
                                                 <th>Jenis Transaksi</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -66,7 +67,19 @@
                                                         <div>{{ $s->pengguna?->nim }}</div>
                                                     </td>
                                                     <td>{{ $s->created_at->format('d-m-Y') }}</td>
-                                                    <td>{{ 'Rp. ' . number_format($s->jumlah, 0, ',', '.') }}
+                                                    <td>
+                                                        <div>{{ 'Rp. ' . number_format($s->jumlah, 0, ',', '.') }}
+                                                        </div>
+                                                        <div>
+                                                            @if ($s->status == 'MENUNGGU')
+                                                                <span class="badge badge-warning">Menunggu</span>
+                                                            @elseif($s->status == 'DITERIMA')
+                                                                <span class="badge badge-success">Berhasil</span>
+                                                            @else
+                                                                <span class="badge badge-danger">Gagal</span>
+                                                            @endif
+                                                        </div>
+                                                    </td>
                                                     <td>{{ $s->jenis_simpanan }}</td>
                                                     @if ($s->jenis_transaksi == 'Transfer')
                                                         <td>
@@ -78,6 +91,23 @@
                                                     @else
                                                         <td>{{ $s->jenis_transaksi }}</td>
                                                     @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <a href="#" data-toggle="dropdown"
+                                                                class="btn btn-floating" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                <i class="ti-more-alt"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                <a href="#myModal" class="dropdown-item"
+                                                                    data-remote="{{ route('pengurus.simpanan.show', $s->id) }}"
+                                                                    data-toggle="modal" data-target="#myModal"
+                                                                    data-title="Permintaan Setor Simpanan">
+                                                                    Validasi Simpanan
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @empty
@@ -96,6 +126,22 @@
 
         </div>
         <!-- ./ Content -->
+
+        <div class="modal" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"></h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         @include('includes.admin.footer')
     </div>
@@ -130,6 +176,15 @@
                     error: function(xhr, status, error) {
                         console.log(xhr.responseText);
                     }
+                });
+            });
+
+            jQuery(document).ready(function($) {
+                $('#myModal').on('show.bs.modal', function(e) {
+                    var button = $(e.relatedTarget);
+                    var modal = $(this);
+                    modal.find('.modal-body').load(button.data("remote"));
+                    modal.find('.modal-title').html(button.data("title"));
                 });
             });
 

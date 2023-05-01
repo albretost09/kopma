@@ -12,7 +12,9 @@ class RiwayatSimpananController extends Controller
     {
         $simpanan = Simpanan::query()
             ->with('riwayatPenarikan')
-            ->where('pengguna_id', auth()->user()->id)->get();
+            ->where('pengguna_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $riwayatPenarikan = $simpanan->map(function ($item) {
             return $item->riwayatPenarikan;

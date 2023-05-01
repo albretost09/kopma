@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use App\Notifications\AnggotaResetPasswordNotification;
-use App\Notifications\PenggunaResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Notifications\AnggotaResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\PenggunaResetPasswordNotification;
 
 class Pengguna extends Authenticatable implements CanResetPassword
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'pengguna';
     protected $guarded = [];

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Anggota\Simpanan;
 
 use Exception;
+use App\Models\Admin;
 use App\Models\Simpanan;
 use Illuminate\Http\Request;
 use App\Models\RiwayatPenarikan;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Anggota\PermintaanPenarikan;
 
 class TarikSimpananController extends Controller
 {
@@ -36,7 +39,9 @@ class TarikSimpananController extends Controller
 
         $saldoSimpanan = $jumlahSimpanan - $jumlahRiwayatPenarikan;
 
-        return view('pages.anggota.tarik-simpanan.index', compact('saldoSimpanan'));
+        $whatsappAdmin = Admin::query()->where('username', 'admin')->first()->no_hp;
+
+        return view('pages.anggota.tarik-simpanan.index', compact('saldoSimpanan', 'whatsappAdmin'));
     }
 
     public function store(Request $request)
@@ -76,12 +81,12 @@ class TarikSimpananController extends Controller
         $saldoSimpanan = $jumlahSimpanan - $jumlahRiwayatPenarikan;
 
         if ($jumlah_tarik > $saldoSimpanan) {
-            return redirect()->route('anggota.tarik-simpanan.index')->with('error', 'Penarikan gagal diajukan');
+            return redirect()->route('anggota.tarik-simpanan.index')->with('error', 'Saldo tidak mencukupi');
         }
 
         $simpanans = $simpanan->get();
 
-        DB::transaction(function () use ($simpanans, $jumlah_tarik, $jenis_transaksi) {
+        DB::transaction(function () use ($simpanans, $jumlah_tarik, $jenis_transaksi, &$riwayat_simpanan, &$result) {
             try {
                 foreach ($simpanans as $simpanan) {
                     if ($jumlah_tarik <= 0) {
@@ -94,10 +99,9 @@ class TarikSimpananController extends Controller
                         $riwayat_simpanan->jumlah_penarikan = $jumlah_tarik;
                         $riwayat_simpanan->bank_tujuan = $jenis_transaksi == 'Transfer' ? request()->bank_tujuan : null;
                         $riwayat_simpanan->nomor_rekening = $jenis_transaksi == 'Transfer' ? request()->nomor_rekening : null;
-                        $riwayat_simpanan->save();
+                        $result = $riwayat_simpanan->save();
 
                         $simpanan->jumlah -= $jumlah_tarik;
-                        // $simpanan->save();
                         $jumlah_tarik = 0;
                     } else {
                         $riwayat_simpanan = new RiwayatPenarikan();
@@ -106,18 +110,24 @@ class TarikSimpananController extends Controller
                         $riwayat_simpanan->jumlah_penarikan = $simpanan->jumlah;
                         $riwayat_simpanan->bank_tujuan = $jenis_transaksi == 'Transfer' ? request()->bank_tujuan : null;
                         $riwayat_simpanan->nomor_rekening = $jenis_transaksi == 'Transfer' ? request()->nomor_rekening : null;
-                        $riwayat_simpanan->save();
+                        $result = $riwayat_simpanan->save();
 
                         $jumlah_tarik -= $simpanan->jumlah;
                         $simpanan->jumlah = 0;
                         // $simpanan->save();
                     }
                 }
+
+                Mail::to(auth()->user()->email)->send(new PermintaanPenarikan($riwayat_simpanan));
             } catch (Exception $e) {
-                return redirect()->route('anggota.riwayat-simpanan.index')->with('error', 'Penarikan gagal diajukan');
+                return false;
             }
         });
 
-        return redirect()->route('anggota.riwayat-simpanan.index')->with('success', 'Penarikan berhasil diajukan');
+        if ($result) {
+            return redirect()->route('anggota.tarik-simpanan.index')->with('success', 'Permintaan penarikan berhasil dikirim');
+        } else {
+            return redirect()->route('anggota.tarik-simpanan.index')->with('error', 'Permintaan penarikan gagal dikirim');
+        }
     }
 }

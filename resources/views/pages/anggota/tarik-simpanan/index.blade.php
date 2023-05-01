@@ -37,31 +37,26 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ul class="nav nav-pills mb-3" role="tablist">
-                                                    <li class="nav-item w-50 text-center">
-                                                        <label class="nav-link active" id="tunai-tab" data-toggle="pill"
-                                                            role="tab" aria-controls="tunai"
-                                                            aria-selected="true">Tunai</label>
-                                                    </li>
-                                                    <li class="nav-item w-50 text-center">
-                                                        <label class="nav-link" id="transfer-tab" data-toggle="pill"
+                                                    <li class="nav-item w-100 text-center">
+                                                        <label class="nav-link active" id="transfer-tab" data-toggle="pill"
                                                             role="tab" aria-controls="transfer"
                                                             aria-selected="false">Transfer</label>
                                                     </li>
                                                 </ul>
-                                                <input type="hidden" name="jenis_transaksi" value="Tunai">
+                                                <input type="hidden" name="jenis_transaksi" value="Transfer">
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Jumlah</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="jumlah_penarikan" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row d-none transfer">
+                                                <div class="form-group row transfer">
                                                     <label class="col-sm-2 col-form-label">Bank Tujuan</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="bank_tujuan" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row d-none transfer">
+                                                <div class="form-group row transfer">
                                                     <label class="col-sm-2 col-form-label">No. Rekening</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="nomor_rekening" class="form-control">
@@ -73,6 +68,28 @@
                                 </div>
                                 <div class="text-center">
                                     <button class="btn btn-primary">TARIK</button>
+                                </div>
+                                <div class="alert alert-warning my-4">
+                                    Proses penarikan simpanan akan diproses dalam waktu 1x24 jam.
+                                </div>
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Kontak Admin</h6>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div>
+                                                    Silahkan hubungi admin jika terjadi kesalahan.
+                                                </div>
+                                                <div class="mt-3">
+                                                    <a href="https://api.whatsapp.com/send?phone={{ $whatsappAdmin }}&text=Halo%20Admin%20Saya%20Mau%20Tanya%20Tentang%20Tarik%20Simpanan%20Anggota%20{{ auth()->user()->nama }}"
+                                                        class="btn btn-success btn-sm" target="_blank">
+                                                        <i class="fa fa-whatsapp"></i>
+                                                        <span class="ml-2">Hubungi Admin</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -103,18 +120,6 @@
             var rupiah = value.replace(/[^0-9]/g, '');
             var rupiah = rupiah.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
             $(this).val(rupiah);
-        });
-
-        $('.nav-pills .nav-link').click(function() {
-            var jenis = $(this).attr('id');
-
-            if (jenis == 'tunai-tab') {
-                $('input[name="jenis_transaksi"]').val('Tunai');
-                $('.transfer').addClass('d-none');
-            } else {
-                $('input[name="jenis_transaksi"]').val('Transfer');
-                $('.transfer').removeClass('d-none');
-            }
         });
 
         toastr.options = {

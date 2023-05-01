@@ -21,7 +21,7 @@
             <button class="btn btn-primary btn-block">Submit</button>
             <hr>
             <p class="text-muted">Take a different action.</p>
-            <a href="register.html" class="btn btn-sm btn-outline-light mr-1">Register now!</a>
+            <a href="{{ route('register.index') }}" class="btn btn-sm btn-outline-light mr-1">Register now!</a>
             or
             <a href="{{ route('login') }}" class="btn btn-sm btn-outline-light ml-1">Login!</a>
         </form>

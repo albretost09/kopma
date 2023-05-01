@@ -65,7 +65,9 @@ class SimpananController extends Controller
      */
     public function show($id)
     {
-        //
+        $simpanan = Simpanan::findOrFail($id);
+
+        return view('pages.pengurus.simpanan.show', compact('simpanan'));
     }
 
     /**
@@ -77,6 +79,31 @@ class SimpananController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function ubahStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:DITERIMA,DITOLAK',
+        ]);
+
+        $simpanan = Simpanan::findOrFail($id);
+
+        $result = $simpanan->update([
+            'status' => $request->status,
+        ]);
+
+        if ($request->status == 'DITERIMA' && $result) {
+            $simpanan->pengguna->update([
+                'status' => 'AKTIF',
+            ]);
+        }
+
+        if ($result) {
+            return redirect()->route('pengurus.simpanan.index')->with('success', 'Validasi simpanan telah dilakukan');
+        } else {
+            return redirect()->route('pengurus.simpanan.index')->with('error', 'Validasi simpanan gagal dilakukan');
+        }
     }
 
     /**

@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="text-holder">
-                            <h5><span>Relasi</span></h5>
+                            <h5><span>Menabung Tanpa Potongan</span></h5>
                         </div>
                     </div>
                     <!--End Single Visa Box-->
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="text-holder">
-                            <h5><span>Menabung Tanpa Potongan</span></h5>
+                            <h5><span>Relasi</span></h5>
                         </div>
                     </div>
                     <!--End Single Visa Box-->

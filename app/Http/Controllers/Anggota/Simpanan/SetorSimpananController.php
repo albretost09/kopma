@@ -26,10 +26,13 @@ class SetorSimpananController extends Controller
         $data['jumlah'] = str_replace('.', '', $data['jumlah']);
         $data['pengguna_id'] = auth()->user()->id;
         $data['bukti_transaksi'] = $request->file('bukti_transaksi') ? $request->file('bukti_transaksi')->store('bukti-transaksi', 'public') : null;
+        $data['status'] = 'MENUNGGU';
 
         $simpananPokok = Simpanan::query()
             ->where('pengguna_id', auth()->user()->id)
-            ->where('jenis_simpanan', 'Pokok')->exists();
+            ->where('jenis_simpanan', 'Pokok')
+            ->where('status', '!=', 'DITOLAK')
+            ->exists();
 
         if ($request->jenis_simpanan == 'Pokok') {
             if ($simpananPokok) {

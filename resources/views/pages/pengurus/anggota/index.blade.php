@@ -54,7 +54,7 @@
                                                     @if ($a->status == 'AKTIF')
                                                         <span class="badge badge-success">Aktif</span>
                                                     @else
-                                                        <span class="badge badge-danger">Tidak Aktif</span>
+                                                        <span class="badge badge-danger">Belum Aktif</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-right">

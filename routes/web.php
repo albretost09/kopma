@@ -70,11 +70,17 @@ Route::prefix('pengurus')->name('pengurus.')->group(
             Route::get('kas/data', [Pengurus\KasController::class, 'data'])->name('kas.data');
             Route::resource('kas', Pengurus\KasController::class);
             Route::get('simpanan/data', [Pengurus\Simpanan\SimpananController::class, 'data'])->name('simpanan.data');
+            Route::get('simpanan/{id}/status', [Pengurus\Simpanan\SimpananController::class, 'ubahStatus'])->name('simpanan.ubah-status');
             Route::resource('simpanan', Pengurus\Simpanan\SimpananController::class);
 
             Route::prefix('setor-simpanan')->name('setor-simpanan.')->group(function () {
                 Route::get('', [Pengurus\Simpanan\SetorSimpananController::class, 'index'])->name('index');
                 Route::post('', [Pengurus\Simpanan\SetorSimpananController::class, 'store'])->name('store');
+            });
+
+            Route::prefix('tarik-simpanan')->name('tarik-simpanan.')->group(function () {
+                Route::get('', [Pengurus\Simpanan\TarikSimpananController::class, 'index'])->name('index');
+                Route::post('', [Pengurus\Simpanan\TarikSimpananController::class, 'store'])->name('store');
             });
 
             Route::get('riwayat-simpanan', [Pengurus\Simpanan\RiwayatSimpananController::class, 'index'])->name('riwayat-simpanan.index');
@@ -126,8 +132,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('kas/data', [Admin\KasController::class, 'data'])->name('kas.data');
         Route::resource('kas', Admin\KasController::class);
         Route::get('simpanan/data', [Admin\Simpanan\SimpananController::class, 'data'])->name('simpanan.data');
+        Route::get('simpanan/{id}/status', [Admin\Simpanan\SimpananController::class, 'ubahStatus'])->name('simpanan.ubah-status');
         Route::resource('simpanan', Admin\Simpanan\SimpananController::class);
-        Route::get('permintaan-penarikan/{id}/status', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'changeStatus'])->name('permintaan-penarikan.ubah-status');
+        Route::post('permintaan-penarikan/{id}/status', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'ubahStatus'])->name('permintaan-penarikan.ubah-status');
+        Route::post('permintaan-penarikan/data', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'data'])->name('permintaan-penarikan.data');
         Route::resource('permintaan-penarikan', Admin\Simpanan\PermintaanPenarikanSimpananController::class);
 
         Route::prefix('pembagian-shu')->name('pembagian-shu.')->group(function () {

@@ -165,8 +165,8 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('anggota.riwayat-simpanan*') ? 'class=active ' : '' }}
-                        href="{{ route('anggota.riwayat-simpanan.index') }}">
+                    <a {{ request()->routeIs('pengurus.riwayat-simpanan*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.riwayat-simpanan.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="activity"></i>
                         </span>
@@ -174,8 +174,8 @@
                     </a>
                 </li>
                 <li>
-                    <a {{ request()->routeIs('anggota.tarik-simpanan*') ? 'class=active ' : '' }}
-                        href="{{ route('anggota.tarik-simpanan.index') }}">
+                    <a {{ request()->routeIs('pengurus.tarik-simpanan*') ? 'class=active ' : '' }}
+                        href="{{ route('pengurus.tarik-simpanan.index') }}">
                         <span class="nav-link-icon">
                             <i data-feather="dollar-sign"></i>
                         </span>

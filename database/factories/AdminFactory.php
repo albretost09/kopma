@@ -18,6 +18,7 @@ class AdminFactory extends Factory
             'username' => $this->faker->unique()->userName,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
+            'no_hp' => $this->faker->phoneNumber,
             'nik' => rand(1000000000000000, 9999999999999999),
             'is_admin' => false,
         ];

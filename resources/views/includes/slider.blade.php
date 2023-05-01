@@ -5,7 +5,13 @@
             <!-- Slide -->
             <div class="slide">
                 <div class="image-layer"
-                    style="background-image:url({{ asset('frontend/assets/images/slides/banner-bg-kopma.jpg') }})">
+                    style="background-image:url({{ asset('frontend/assets/images/slides/kopma-1.jpg') }})">
+                </div>
+            </div>
+            <!-- Slide -->
+            <div class="slide">
+                <div class="image-layer"
+                    style="background-image:url({{ asset('frontend/assets/images/slides/kopma-2.jpg') }})">
                 </div>
             </div>
         </div>

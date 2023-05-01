@@ -91,7 +91,7 @@
                     <div class="clearfix">
                         <!--Logo-->
                         <div class="logo float-left">
-                            <a href="index.html" class="img-responsive"><img
+                            <a href="#" class="img-responsive"><img
                                     src="{{ asset('frontend/assets/images/resources/sticky-logo.png') }}"
                                     alt="" title=""></a>
                         </div>
@@ -154,6 +154,10 @@
         <!--Start Layanan Kami -->
         @include('includes.layanan-kopma')
         <!--End Layanan Kami -->
+
+        <!--Start Usaha Kopma-->
+        @include('includes.usaha-kopma')
+        <!--End Usaha Kopma-->
 
         <!--Start Kontak-->
         @include('includes.kontak-kopma')

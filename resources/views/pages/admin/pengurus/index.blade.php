@@ -17,13 +17,15 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="mt-2 mt-md-0">
-                    <a href="#modalTambahPengurus" class="btn btn-primary"
-                        data-remote="{{ route('admin.pengurus.create') }}" data-toggle="modal"
-                        data-target="#modalTambahPengurus" data-title="Tambah Pengurus">
-                        Tambah Pengurus
-                    </a>
-                </div>
+                @if ($jumlahPengurus < 3)
+                    <div class="mt-2 mt-md-0">
+                        <a href="#modalTambahPengurus" class="btn btn-primary"
+                            data-remote="{{ route('admin.pengurus.create') }}" data-toggle="modal"
+                            data-target="#modalTambahPengurus" data-title="Tambah Pengurus">
+                            Tambah Pengurus
+                        </a>
+                    </div>
+                @endif
             </div>
 
             <div class="row">
@@ -61,7 +63,7 @@
                                                     @if ($p->status == 'AKTIF')
                                                         <span class="badge badge-success">Aktif</span>
                                                     @else
-                                                        <span class="badge badge-danger">Tidak Aktif</span>
+                                                        <span class="badge badge-danger">Belum Aktif</span>
                                                     @endif
                                                 </td>
                                                 <td class="text-right">

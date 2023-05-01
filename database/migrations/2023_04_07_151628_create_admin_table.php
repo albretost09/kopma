@@ -19,6 +19,7 @@ class CreateAdminTable extends Migration
             $table->string('nama');
             $table->string('username');
             $table->string('email')->unique();
+            $table->string('no_hp')->nullable();
             $table->string('password');
             $table->string('nik', 16)->nullable();
             $table->boolean('is_admin')->default(false);
@@ -30,6 +31,7 @@ class CreateAdminTable extends Migration
             'nama' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@example.com',
+            'no_hp' => '081234567890',
             'password' => bcrypt('password'),
             'is_admin' => true,
         ]);

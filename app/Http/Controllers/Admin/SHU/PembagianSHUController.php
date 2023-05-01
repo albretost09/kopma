@@ -39,6 +39,7 @@ class PembagianSHUController extends Controller
                 'id' => $item->id,
                 'nama' => $item->nama,
                 'total_simpanan' => $simpananPokok + $simpananWajib,
+                // jasa modal/total jasa modal*persentase nominal anggota koperasi
                 'shu' => (($simpananPokok + $simpananWajib) / $totalSimpananSemuaAnggota) * $nominalAnggotaKoperasi,
             ];
         }

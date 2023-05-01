@@ -77,7 +77,16 @@
                                                 <td>{{ $rp->created_at->format('d-m-Y') }}</td>
                                                 <td>
                                                     <div>Uang Keluar</div>
-                                                    <div>{{ $rp->jenis_transaksi }}</div>
+                                                    @if ($rp->jenis_transaksi == 'Transfer')
+                                                        <span>{{ $rp->jenis_transaksi }}</span>
+                                                        @if ($rp->bukti_transfer != null)
+                                                            <small><a href="{{ asset('storage/' . $rp->bukti_transfer) }}"
+                                                                    target="_blank" class="text-primary">Lihat
+                                                                    File</a></small>
+                                                        @endif
+                                                    @else
+                                                        <div>{{ $rp->jenis_transaksi }}</div>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <div>{{ 'Rp. ' . number_format($rp->jumlah_penarikan, 0, ',', '.') }}

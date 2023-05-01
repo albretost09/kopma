@@ -23,7 +23,13 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">Permintaan Penarikan</h6>
+                            <div class="d-flex justify-content-between align-items-center mb-5">
+                                <h5>Permintaan Penarikan</h5>
+                                <div>
+                                    <a href="{{ route('admin.permintaan-penarikan.create') }}" class="btn btn-primary">Tarik
+                                        Simpanan</a>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table id="members" class="table">
                                     <thead>
@@ -121,6 +127,23 @@
                     "targets": [0]
                 }],
             });
+
+            toastr.options = {
+                timeOut: 3000,
+                progressBar: true,
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                showDuration: 200,
+                hideDuration: 200
+            };
+
+            @if (session()->has('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
+
+            @if (session()->has('error'))
+                toastr.danger("{{ session('error') }}");
+            @endif
 
             jQuery(document).ready(function($) {
                 $('#myModal').on('show.bs.modal', function(e) {

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body p-0">
                 <table class="table table-striped">
                     <tr>
                         <td>Nama</td>
@@ -57,17 +57,37 @@
     </div>
 </div>
 
-<div class="row justify-content-center">
-    <div class="col-4">
-        <a href="{{ route('admin.permintaan-penarikan.ubah-status', $permintaanPenarikan->id) }}?status=DITERIMA"
-            class="btn btn-success btn-block">
-            <i class="fa fa-check mr-2"></i> Terima
-        </a>
-    </div>
-    <div class="col-4">
-        <a href="{{ route('admin.permintaan-penarikan.ubah-status', $permintaanPenarikan->id) }}?status=DITOLAK"
-            class="btn btn-danger btn-block">
-            <i class="fa fa-times mr-2"></i> Tolak
-        </a>
-    </div>
-</div>
+@if ($permintaanPenarikan->status == 'MENUNGGU')
+    <form action="{{ route('admin.permintaan-penarikan.ubah-status', $permintaanPenarikan->id) }}" method="post"
+        enctype="multipart/form-data">
+        @csrf
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="bukti">
+                        <span>Bukti Transfer</span>
+                    </label>
+                    <input type="file" name="bukti" id="bukti" class="form-control" accept="image/*">
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4 text-right">
+                <label for="diterima">
+                    <button type="submit" name="status" value="DITERIMA" id="diterima"
+                        class="btn btn-success btn-block" onclick="return confirm('Apakah anda yakin?')">
+                        <i class="fa fa-check mr-2"></i> Terima
+                    </button>
+                </label>
+            </div>
+            <div class="col-4 text-left">
+                <label for="ditolak">
+                    <button type="submit" name="status" value="DITOLAK" id="ditolak"
+                        class="btn btn-danger btn-block" onclick="return confirm('Apakah anda yakin?')">
+                        <i class="fa fa-times mr-2"></i> Tolak
+                    </button>
+            </div>
+        </div>
+    </form>
+@endif

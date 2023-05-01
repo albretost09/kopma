@@ -20,6 +20,7 @@ class CreateRiwayatPenarikanTable extends Migration
             $table->string('jenis_transaksi');
             $table->string('bank_tujuan')->nullable();
             $table->string('nomor_rekening')->nullable();
+            $table->string('bukti_transfer')->nullable();
             $table->dateTime('tanggal_penarikan')->default(now());
             $table->string('status')->default('MENUNGGU');
             $table->timestamps();

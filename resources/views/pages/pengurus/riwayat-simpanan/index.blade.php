@@ -32,6 +32,7 @@
                                             <th>Tanggal</th>
                                             <th>Transaksi</th>
                                             <th>Jumlah</th>
+                                            <th>Jenis Simpanan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,6 +64,16 @@
                                                         @endif
                                                     </div>
                                                 </td>
+                                                @if ($s->jenis_transaksi == 'Transfer')
+                                                    <td>
+                                                        <span>{{ $s->jenis_transaksi }}</span>
+                                                        <small><a href="{{ asset('storage/' . $s->bukti_transaksi) }}"
+                                                                target="_blank" class="text-primary">Lihat
+                                                                File</a></small>
+                                                    </td>
+                                                @else
+                                                    <td>{{ $s->jenis_transaksi }}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
 
@@ -77,7 +88,16 @@
                                                 <td>{{ $rp->created_at->format('d-m-Y') }}</td>
                                                 <td>
                                                     <div>Uang Keluar</div>
-                                                    <div>{{ $rp->jenis_transaksi }}</div>
+                                                    @if ($rp->jenis_transaksi == 'Transfer')
+                                                        <span>{{ $rp->jenis_transaksi }}</span>
+                                                        @if ($rp->bukti_transfer != null)
+                                                            <small><a href="{{ asset('storage/' . $rp->bukti_transfer) }}"
+                                                                    target="_blank" class="text-primary">Lihat
+                                                                    File</a></small>
+                                                        @endif
+                                                    @else
+                                                        <div>{{ $rp->jenis_transaksi }}</div>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <div>{{ 'Rp. ' . number_format($rp->jumlah_penarikan, 0, ',', '.') }}
@@ -92,6 +112,16 @@
                                                         @endif
                                                     </div>
                                                 </td>
+                                                @if ($s->jenis_transaksi == 'Transfer')
+                                                    <td>
+                                                        <span>{{ $s->jenis_transaksi }}</span>
+                                                        <small><a href="{{ asset('storage/' . $s->bukti_transaksi) }}"
+                                                                target="_blank" class="text-primary">Lihat
+                                                                File</a></small>
+                                                    </td>
+                                                @else
+                                                    <td>{{ $s->jenis_transaksi }}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>

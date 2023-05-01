@@ -88,6 +88,7 @@ class AnggotaController extends Controller
 
         $result = $anggota->update([
             'status' => $request->status,
+            'deleted_at' => $request->status == 'AKTIF' ? null : now(),
         ]);
 
         if ($result) {

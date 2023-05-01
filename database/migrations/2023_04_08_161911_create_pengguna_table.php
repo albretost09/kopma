@@ -30,18 +30,27 @@ class CreatePenggunaTable extends Migration
             $table->string('nik')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('role')->default('ANGGOTA');
-            $table->string('status')->default('AKTIF');
+            $table->string('status')->default('NONAKTIF');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 
-        Pengguna::factory(10)->create();
+        Pengguna::factory(3)->create([
+            'role' => 'PENGURUS',
+            'status' => 'AKTIF',
+        ]);
+
+        Pengguna::factory(12)->create([
+            'role' => 'ANGGOTA',
+        ]);
 
         Pengguna::factory()->create([
             'nama' => 'Angellita',
             'username' => 'angellita',
             'role' => 'ANGGOTA',
+            'status' => 'AKTIF',
         ]);
     }
 

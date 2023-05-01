@@ -21,7 +21,9 @@ class PengurusController extends Controller
             ->latest()
             ->get();
 
-        return view('pages.admin.pengurus.index', compact('pengurus'));
+        $jumlahPengurus = $pengurus->count();
+
+        return view('pages.admin.pengurus.index', compact('pengurus', 'jumlahPengurus'));
     }
 
     /**
@@ -33,6 +35,7 @@ class PengurusController extends Controller
     {
         $anggota = Pengguna::query()
             ->where('role', 'ANGGOTA')
+            ->where('status', 'AKTIF')
             ->oldest('nama')
             ->latest()
             ->get();
@@ -51,6 +54,16 @@ class PengurusController extends Controller
         $request->validate([
             'pengurus' => 'required|array',
         ]);
+
+        $jumlahPengurus = Pengguna::query()
+            ->where('role', 'PENGURUS')
+            ->count();
+
+        if ($jumlahPengurus + count($request->pengurus) > 3) {
+            return redirect()
+                ->route('admin.pengurus.index')
+                ->with('error', 'Jumlah pengurus tidak boleh lebih dari 3');
+        }
 
         $result = Pengguna::query()
             ->whereIn('id', $request->pengurus)
@@ -158,7 +171,9 @@ class PengurusController extends Controller
     {
         $pengurus = Pengguna::findOrFail($id);
 
-        $result = $pengurus->delete();
+        $result = $pengurus->update([
+            'role' => 'ANGGOTA',
+        ]);
 
         if ($result) {
             return redirect()->route('admin.pengurus.index')->with('success', 'Pengurus berhasil dihapus');

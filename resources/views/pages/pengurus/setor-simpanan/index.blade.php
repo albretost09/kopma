@@ -29,22 +29,27 @@
                                 @csrf
                                 <div class="card">
                                     <div class="card-body">
-                                        <h6 class="card-title">Setor Simpanan</h6>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title">Setor Simpanan</h6>
+                                            <div class="d-flex justify-content-between">
+                                                <img src="{{ asset('backend/assets/media/image/bank/bri.png') }}"
+                                                    alt="image" class="img-fluid mb-4" width="50">
+                                                <div class="text-right ml-3">
+                                                    <div class="font-weight-bold">343401047858531</div>
+                                                    <span>a.n KOPMA UPR</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ul class="nav nav-pills mb-3" role="tablist">
-                                                    <li class="nav-item w-50 text-center">
-                                                        <label class="nav-link active" id="tunai-tab" data-toggle="pill"
-                                                            role="tab" aria-controls="tunai"
-                                                            aria-selected="true">Tunai</label>
-                                                    </li>
-                                                    <li class="nav-item w-50 text-center">
-                                                        <label class="nav-link" id="transfer-tab" data-toggle="pill"
+                                                    <li class="nav-item w-100 text-center">
+                                                        <label class="nav-link active" id="transfer-tab" data-toggle="pill"
                                                             role="tab" aria-controls="transfer"
                                                             aria-selected="false">Transfer</label>
                                                     </li>
                                                 </ul>
-                                                <input type="hidden" name="jenis_transaksi" value="Tunai">
+                                                <input type="hidden" name="jenis_transaksi" value="Transfer">
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Jenis Simpanan</label>
                                                     <div class="col-sm-10">
@@ -62,14 +67,14 @@
                                                         <input type="text" name="jumlah" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row d-none bukti">
+                                                <div class="form-group row bukti">
                                                     <label class="col-sm-2 col-form-label">Bukti Transfer</label>
                                                     <div class="col-sm-10">
                                                         <input type="file" name="bukti_transaksi" accept="image/*"
                                                             class="form-control border border-0">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row d-none bukti">
+                                                <div class="form-group row bukti">
                                                     <label class="col-sm-2 col-form-label">Preview: </label>
                                                     <img src="" alt="" class="img-fluid bukti-gambar"
                                                         width="150">
@@ -110,20 +115,6 @@
             var rupiah = value.replace(/[^0-9]/g, '');
             var rupiah = rupiah.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
             $(this).val(rupiah);
-        });
-
-        $('.nav-pills .nav-link').click(function() {
-            var jenis = $(this).attr('id');
-
-            if (jenis == 'tunai-tab') {
-                $('input[name="jenis_transaksi"]').val('Tunai');
-                $('.bukti').addClass('d-none');
-                $('input[name="bukti_transaksi"]').val('');
-                $('.bukti-gambar').attr('src', '');
-            } else {
-                $('input[name="jenis_transaksi"]').val('Transfer');
-                $('.bukti').removeClass('d-none');
-            }
         });
 
         $('input[name="bukti_transaksi"]').on('change', function() {
