@@ -47,6 +47,11 @@
         .footer {
             padding: 90px 0 70px !important;
         }
+
+        .main-slider .slide .image-layer {
+            background-size: cover !important;
+            background-position: center top !important;
+        }
     </style>
 
     @stack('style')
