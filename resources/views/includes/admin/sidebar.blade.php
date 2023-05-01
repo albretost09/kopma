@@ -92,15 +92,6 @@
                     </a>
                 </li>
                 <li>
-                    {{-- <a {{ request()->routeIs('admin.pengurus*') ? 'class=active ' : '' }} --}}
-                    <a href="{{ route('admin.pengurus.index') }}">
-                        <span class="nav-link-icon">
-                            <i data-feather="settings"></i>
-                        </span>
-                        <span>Pengaturan</span>
-                    </a>
-                </li>
-                <li>
                     <a {{ request()->routeIs('admin.pembagian-shu*') ? 'class=active ' : '' }}
                         href="{{ route('admin.pembagian-shu.index') }}">
                         <span class="nav-link-icon">

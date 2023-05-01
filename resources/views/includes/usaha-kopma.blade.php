@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="text-holder">
-                            <h5><span>Nana Bouque</span></h5>
+                            <h5><span>Nana Bouquet</span></h5>
                         </div>
                     </div>
                     <!--End Usaha Box-->
