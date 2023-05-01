@@ -10,10 +10,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $jumlahSaldo = Simpanan::query()
-            ->where('pengguna_id', auth()->user()->id)
-            ->where('status', 'DITERIMA')
-            ->sum('jumlah') ?? 0;
         $simpanan = Simpanan::query()
             ->where('pengguna_id', auth()->user()->id)
             ->where('jenis_simpanan', 'Sukarela')
@@ -42,6 +38,7 @@ class DashboardController extends Controller
             ->where('jenis_simpanan', 'Pokok')
             ->orWhere('jenis_simpanan', 'Wajib')
             ->sum('jumlah') ?? 0;
+        $jumlahSaldo = $jumlahSimpananSukarela + $jumlahSimpananPokokWajib;
 
         $statusAnggota = auth()->user()->status;
 
