@@ -77,7 +77,7 @@
                                                 <div class="form-group row bukti">
                                                     <label class="col-sm-2 col-form-label">Preview: </label>
                                                     <img src="" alt="" class="img-fluid bukti-gambar"
-                                                        width="150">
+                                                        width="100">
                                                 </div>
                                             </div>
                                         </div>

@@ -36,7 +36,6 @@ class TerimaPermintaanPenarikan extends Mailable
         $admin = Admin::query()->where('username', 'admin')->first();
 
         return $this->subject('[Pemberitahuan] Permintaan Penarikan Dana Diterima')
-            ->view('emails.admin.terima-permintaan-penarikan', compact('permintaanPenarikan', 'user', 'admin'))
-            ->attachFromStorage($permintaanPenarikan->bukti_transfer);
+            ->view('emails.admin.terima-permintaan-penarikan', compact('permintaanPenarikan', 'user', 'admin'));
     }
 }
