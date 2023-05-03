@@ -30,7 +30,7 @@ class CreatePenggunaTable extends Migration
             $table->string('nik')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('role')->default('ANGGOTA');
-            $table->string('status')->default('NONAKTIF');
+            $table->string('status')->default('BELUM_AKTIF');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
