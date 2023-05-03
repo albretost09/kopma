@@ -8,7 +8,7 @@
                     <span class="input-group-text">Status</span>
                 </div>
                 <select class="form-control" name="status">
-                    @if ($anggota->status == 'AKTIF')
+                    @if ($anggota->status == 'NONAKTIF')
                         <option value="NONAKTIF" {{ $anggota->status == 'NONAKTIF' ? 'selected' : '' }}>Tidak Aktif
                         </option>
                     @else
