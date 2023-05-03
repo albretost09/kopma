@@ -8,8 +8,14 @@
                     <span class="input-group-text">Status</span>
                 </div>
                 <select class="form-control" name="status">
-                    <option value="AKTIF" {{ $anggota->status == 'AKTIF' ? 'selected' : '' }}>Aktif</option>
-                    <option value="NONAKTIF" {{ $anggota->status == 'NONAKTIF' ? 'selected' : '' }}>Tidak Aktif</option>
+                    @if ($anggota->status == 'AKTIF')
+                        <option value="NONAKTIF" {{ $anggota->status == 'NONAKTIF' ? 'selected' : '' }}>Tidak Aktif
+                        </option>
+                    @else
+                        <option value="AKTIF" {{ $anggota->status == 'AKTIF' ? 'selected' : '' }}>Aktif</option>
+                        <option value="NONAKTIF" {{ $anggota->status == 'NONAKTIF' ? 'selected' : '' }}>Tidak Aktif
+                        </option>
+                    @endif
                 </select>
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Save</button>
