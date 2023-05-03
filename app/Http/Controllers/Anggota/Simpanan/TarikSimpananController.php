@@ -51,6 +51,7 @@ class TarikSimpananController extends Controller
             'jumlah_penarikan' => 'required|numeric',
             'bank_tujuan' => 'required_if:jenis_transaksi,Transfer',
             'nomor_rekening' => 'required_if:jenis_transaksi,Transfer',
+            'nama_pemilik' => 'required_if:jenis_transaksi,Transfer',
         ]);
 
         $jumlah_tarik = $request->jumlah_penarikan;

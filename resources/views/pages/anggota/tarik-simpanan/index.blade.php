@@ -50,16 +50,22 @@
                                                         <input type="text" name="jumlah_penarikan" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row transfer">
+                                                <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Bank Tujuan</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="bank_tujuan" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row transfer">
+                                                <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">No. Rekening</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="nomor_rekening" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 col-form-label">Nama Pemilik Rekening</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="nama_pemilik" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>

@@ -76,7 +76,7 @@
                                                                 data-remote="{{ route('admin.permintaan-penarikan.show', $p->id) }}"
                                                                 data-toggle="modal" data-target="#myModal"
                                                                 data-title="Permintaan Penarikan Simpanan">
-                                                                Ubah Status
+                                                                Detail Penarikan
                                                             </a>
                                                         </div>
                                                     </div>
