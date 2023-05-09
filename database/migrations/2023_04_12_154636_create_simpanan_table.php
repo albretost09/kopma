@@ -27,15 +27,15 @@ class CreateSimpananTable extends Migration
             $table->timestamps();
         });
 
-        Simpanan::create([
-            'pengguna_id' => Pengguna::where('username', 'angellita')->first()->id,
-            'jumlah' => 100000,
-            'jenis_simpanan' => 'Pokok',
-            'jenis_transaksi' => 'Tunai',
-            'bukti_transaksi' => null,
-            'status' => 'DITERIMA',
-            'tanggal_transaksi' => now(),
-        ]);
+        // Simpanan::create([
+        //     'pengguna_id' => Pengguna::where('username', 'angellita')->first()->id,
+        //     'jumlah' => 100000,
+        //     'jenis_simpanan' => 'Pokok',
+        //     'jenis_transaksi' => 'Tunai',
+        //     'bukti_transaksi' => null,
+        //     'status' => 'DITERIMA',
+        //     'tanggal_transaksi' => now(),
+        // ]);
     }
 
     /**

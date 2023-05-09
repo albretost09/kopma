@@ -36,21 +36,21 @@ class CreatePenggunaTable extends Migration
             $table->timestamps();
         });
 
-        Pengguna::factory(3)->create([
-            'role' => 'PENGURUS',
-            'status' => 'AKTIF',
-        ]);
+        // Pengguna::factory(3)->create([
+        //     'role' => 'PENGURUS',
+        //     'status' => 'AKTIF',
+        // ]);
 
-        Pengguna::factory(12)->create([
-            'role' => 'ANGGOTA',
-        ]);
+        // Pengguna::factory(12)->create([
+        //     'role' => 'ANGGOTA',
+        // ]);
 
-        Pengguna::factory()->create([
-            'nama' => 'Angellita',
-            'username' => 'angellita',
-            'role' => 'ANGGOTA',
-            'status' => 'AKTIF',
-        ]);
+        // Pengguna::factory()->create([
+        //     'nama' => 'Angellita',
+        //     'username' => 'angellita',
+        //     'role' => 'ANGGOTA',
+        //     'status' => 'AKTIF',
+        // ]);
     }
 
     /**

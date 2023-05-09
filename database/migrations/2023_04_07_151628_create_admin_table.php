@@ -36,7 +36,7 @@ class CreateAdminTable extends Migration
             'is_admin' => true,
         ]);
 
-        Admin::factory()->count(2)->create();
+        // Admin::factory()->count(2)->create();
     }
 
     /**
