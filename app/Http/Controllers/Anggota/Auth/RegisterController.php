@@ -36,12 +36,14 @@ class RegisterController extends Controller
             return redirect()->route('anggota.auth.register')->with('error', 'Password tidak sama.');
         }
 
+        $awalNoHP = substr($request->no_hp, 0, 2);
+
         $result = Pengguna::create([
             'nama' => $request->nama,
             'nim' => $request->nim,
             'username' => $request->username,
             'email' => $request->email,
-            'no_hp' => $request->no_hp,
+            'no_hp' => str_replace('08', '628', $awalNoHP),
             'nik' => $request->nik,
             'fakultas' => $request->fakultas,
             'jurusan' => $request->jurusan,
