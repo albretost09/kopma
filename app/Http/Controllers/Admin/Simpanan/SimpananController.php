@@ -90,6 +90,12 @@ class SimpananController extends Controller
 
         $result = Simpanan::create($data);
 
+        if ($result && $request->jenis_simpanan == 'Pokok') {
+            $result->pengguna->update([
+                'status' => 'AKTIF',
+            ]);
+        }
+
         if ($result) {
             return redirect()->route('admin.simpanan.index')->with('success', 'Simpanan berhasil disetor');
         } else {
