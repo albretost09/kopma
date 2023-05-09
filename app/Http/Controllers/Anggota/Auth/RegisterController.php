@@ -18,9 +18,9 @@ class RegisterController extends Controller
     {
         $request->validate([
             'nama' => 'required|max:255',
-            'nim' => 'required',
-            'username' => 'required|max:255',
-            'email' => 'required|email|max:255',
+            'nim' => 'required|unique:pengguna',
+            'username' => 'required|max:255|unique:pengguna',
+            'email' => 'required|email|max:255|unique:pengguna',
             'no_hp' => 'nullable',
             'nik' => 'nullable|numeric',
             'fakultas' => 'nullable',
