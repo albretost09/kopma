@@ -75,6 +75,37 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if (count($bankTujuanTersimpan) > 0)
+                                    <h4>Bank Tujuan Tersimpan</h4>
+                                    <div class="row">
+                                        @foreach ($bankTujuanTersimpan as $item)
+                                            <div class="col-md-3">
+                                                <a href="#" onclick="isiValue(this)">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <input type="hidden" name="bank_tujuan_value"
+                                                                value="{{ $item->bank_tujuan }}">
+                                                            <input type="hidden" name="nomor_rekening_value"
+                                                                value="{{ $item->nomor_rekening }}">
+                                                            <input type="hidden" name="nama_pemilik_value"
+                                                                value="{{ $item->nama_pemilik }}">
+
+                                                            <h6>{{ $item->nama_pemilik }}</h6>
+                                                            @php
+                                                                $bank = strtoupper($item->bank_tujuan);
+                                                                $bank = str_replace('_', ' ', $bank);
+                                                            @endphp
+                                                            <span>{{ $bank }}: </span>
+                                                            <span>{{ $item->nomor_rekening }}</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endif
+
                                 <div class="text-center">
                                     <button class="btn btn-primary">TARIK</button>
                                 </div>
@@ -126,6 +157,16 @@
 @push('script')
     <script src="{{ asset('backend/vendors/select2/js/select2.min.js') }}"></script>
     <script>
+        function isiValue(e) {
+            var bank_tujuan = $(e).find('input[name="bank_tujuan_value"]').val();
+            var nomor_rekening = $(e).find('input[name="nomor_rekening_value"]').val();
+            var nama_pemilik = $(e).find('input[name="nama_pemilik_value"]').val();
+
+            $('select[name="bank_tujuan"]').val(bank_tujuan).trigger('change');
+            $('input[name="nomor_rekening"]').val(nomor_rekening);
+            $('input[name="nama_pemilik"]').val(nama_pemilik);
+        }
+
         // Mendapatkan elemen dropdown
         const bank_tujuan = document.getElementById('bank_tujuan');
 

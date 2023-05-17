@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
 
-                                @if (!empty($bankTujuanTersimpan))
+                                @if (count($bankTujuanTersimpan) > 0)
                                     <h4>Bank Tujuan Tersimpan</h4>
                                     <div class="row">
                                         @foreach ($bankTujuanTersimpan as $item)
