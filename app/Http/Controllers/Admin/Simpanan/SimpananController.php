@@ -137,6 +137,7 @@ class SimpananController extends Controller
 
         $result = $simpanan->update([
             'status' => $request->status,
+            'disetujui_oleh' => auth('admin')->user()->nama,
         ]);
 
         if ($request->status == 'DITERIMA' && $result) {

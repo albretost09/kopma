@@ -23,6 +23,7 @@ class CreateSimpananTable extends Migration
             $table->string('jenis_transaksi')->nullable();
             $table->string('bukti_transaksi')->nullable();
             $table->dateTime('tanggal_transaksi')->default(now());
+            $table->string('disetujui_oleh')->nullable();
             $table->string('status')->default('DITERIMA');
             $table->timestamps();
         });

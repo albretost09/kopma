@@ -194,9 +194,9 @@
                                                     </td>
                                                 </tr>
                                             @empty
-                                                <tr>
+                                                {{-- <tr>
                                                     <td colspan="6" class="text-center">No data available in table</td>
-                                                </tr>
+                                                </tr> --}}
                                             @endforelse
                                         </tbody>
                                     </table>

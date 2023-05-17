@@ -26,8 +26,15 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
+
+            if (Auth::user()->status == 'NONAKTIF') {
+                return back()->withErrors([
+                    'username' => 'Akun anda tidak aktif.',
+                ]);
+            }
 
             return redirect()->intended(route('dashboard'));
         }

@@ -41,6 +41,11 @@
                         <td>:</td>
                         <td>{{ $simpanan->jenis_transaksi }}</td>
                     </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">
+                            Divalidasi oleh: {{ $simpanan->disetujui_oleh }}
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>

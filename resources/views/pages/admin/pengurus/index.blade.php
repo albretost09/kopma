@@ -47,7 +47,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($pengurus as $p)
+                                        @foreach ($pengurus as $p)
                                             <tr>
                                                 <td>
                                                     {{ $loop->index + 1 }}
@@ -98,11 +98,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="7" class="text-center">No data available in table</td>
-                                            </tr>
-                                        @endforelse
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
