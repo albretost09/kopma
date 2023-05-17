@@ -99,6 +99,7 @@ class TarikSimpananController extends Controller
                         $riwayat_simpanan->jumlah_penarikan = $jumlah_tarik;
                         $riwayat_simpanan->bank_tujuan = $jenis_transaksi == 'Transfer' ? request()->bank_tujuan : null;
                         $riwayat_simpanan->nomor_rekening = $jenis_transaksi == 'Transfer' ? request()->nomor_rekening : null;
+                        $riwayat_simpanan->nama_pemilik = $jenis_transaksi == 'Transfer' ? request()->nama_pemilik : null;
                         $result = $riwayat_simpanan->save();
 
                         $simpanan->jumlah -= $jumlah_tarik;
@@ -111,6 +112,7 @@ class TarikSimpananController extends Controller
                         $riwayat_simpanan->jumlah_penarikan = $simpanan->jumlah;
                         $riwayat_simpanan->bank_tujuan = $jenis_transaksi == 'Transfer' ? request()->bank_tujuan : null;
                         $riwayat_simpanan->nomor_rekening = $jenis_transaksi == 'Transfer' ? request()->nomor_rekening : null;
+                        $riwayat_simpanan->nama_pemilik = $jenis_transaksi == 'Transfer' ? request()->nama_pemilik : null;
                         $result = $riwayat_simpanan->save();
 
                         $jumlah_tarik -= $simpanan->jumlah;

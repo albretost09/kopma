@@ -42,7 +42,13 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h6 class="card-title">Simpanan</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                    <h5>Simpanan</h5>
+                                    <div>
+                                        <a href="{{ route('pengurus.simpanan.create') }}" class="btn btn-primary">Setor
+                                            Simpanan</a>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table id="savings" class="table">
                                         <thead>

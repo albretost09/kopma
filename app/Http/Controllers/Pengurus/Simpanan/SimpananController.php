@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pengurus\Simpanan;
 
+use App\Models\Pengguna;
 use App\Models\Simpanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,7 +44,11 @@ class SimpananController extends Controller
      */
     public function create()
     {
-        //
+        $anggota = Pengguna::query()
+            ->where('role', 'ANGGOTA')
+            ->get();
+
+        return view('pages.pengurus.simpanan.create', compact('anggota'));
     }
 
     /**
@@ -54,7 +59,49 @@ class SimpananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pengguna_id' => 'required|exists:pengguna,id',
+            'jenis_transaksi' => 'required|in:Tunai,Transfer',
+            'jenis_simpanan' => 'required|in:Pokok,Wajib,Sukarela',
+            'jumlah' => 'required|numeric',
+            'bukti_transaksi' => 'nullable|image|max:2048',
+        ]);
+
+        $data = $request->all();
+        $data['jumlah'] = str_replace('.', '', $data['jumlah']);
+        $data['bukti_transaksi'] = $request->file('bukti_transaksi') ? $request->file('bukti_transaksi')->store('bukti-transaksi', 'public') : null;
+        $data['disetujui_oleh'] = auth()->user()->nama;
+        $data['status'] = 'DITERIMA';
+
+        $simpananPokok = Simpanan::query()
+            ->where('pengguna_id', $request->pengguna_id)
+            ->where('jenis_simpanan', 'Pokok')
+            ->where('status', '!=', 'DITOLAK')
+            ->exists();
+
+        if ($request->jenis_simpanan == 'Pokok') {
+            if ($simpananPokok) {
+                return redirect()->route('pengurus.simpanan.index')->with('error', 'Anda sudah memiliki simpanan pokok');
+            }
+        } else {
+            if (!$simpananPokok) {
+                return redirect()->route('pengurus.simpanan.index')->with('error', 'Anda belum memiliki simpanan pokok');
+            }
+        }
+
+        $result = Simpanan::create($data);
+
+        if ($result && $request->jenis_simpanan == 'Pokok') {
+            $result->pengguna->update([
+                'status' => 'AKTIF',
+            ]);
+        }
+
+        if ($result) {
+            return redirect()->route('pengurus.simpanan.index')->with('success', 'Simpanan berhasil disetor');
+        } else {
+            return redirect()->route('pengurus.simpanan.index')->with('error', 'Simpanan gagal disetor');
+        }
     }
 
     /**

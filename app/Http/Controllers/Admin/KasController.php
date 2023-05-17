@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Kas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -75,8 +76,25 @@ class KasController extends Controller
      */
     public function store(Request $request)
     {
+        function toRoman($number)
+        {
+            $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+            $returnValue = '';
+            while ($number > 0) {
+                foreach ($map as $roman => $int) {
+                    if ($number >= $int) {
+                        $number -= $int;
+                        $returnValue .= $roman;
+                        break;
+                    }
+                }
+            }
+            return $returnValue;
+        }
+
         $request->validate([
             'jenis' => 'required|in:Keluar,Masuk',
+            'tanggal_transaksi' => 'required|date_format:d/m/Y',
             'jumlah' => 'required',
             'keterangan' => 'nullable',
             'no_cek' => 'nullable',
@@ -84,6 +102,19 @@ class KasController extends Controller
 
         $data = $request->all();
         $data['jumlah'] = str_replace('.', '', $data['jumlah']);
+        $data['dibuat_oleh'] = auth('admin')->user()->nama;
+
+        $bulan = explode('/', $data['tanggal_transaksi'])[1];
+        $nomor = Kas::whereMonth('tanggal_transaksi', $bulan)->where('jenis', $data['jenis'])->exists() ? Kas::whereMonth('tanggal_transaksi', $bulan)->where('jenis', $data['jenis'])->count() + 1 : 1;
+        $nomor = str_pad($nomor, 3, '0', STR_PAD_LEFT);
+        // convert to romawi
+        $bulan = toRoman($bulan);
+        $tahun = explode('/', $data['tanggal_transaksi'])[2];
+        $jenis = $data['jenis'] == 'Masuk' ? 'UM' : 'UK';
+        $no_cek = $nomor . '/' . $jenis . '/' . $bulan . '/' . $tahun;
+
+        $data['no_cek'] = $no_cek;
+        $data['tanggal_transaksi'] = Carbon::createFromFormat('d/m/Y', $data['tanggal_transaksi'])->format('Y-m-d');
 
         $result = Kas::create($data);
 

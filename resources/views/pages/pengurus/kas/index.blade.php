@@ -152,6 +152,7 @@
                                                 <th>No. Cek</th>
                                                 <th>Keterangan</th>
                                                 <th>Jumlah</th>
+                                                <th>Dibuat Oleh</th>
                                                 <th class="text-right">Aksi</th>
                                             </tr>
                                         </thead>
@@ -172,6 +173,7 @@
                                                         <td class="text-danger">
                                                             {{ 'Rp. ' . number_format($k->jumlah, 0, ',', '.') }}</td>
                                                     @endif
+                                                    <td>{{ $k->dibuat_oleh }}</td>
                                                     <td class="text-right">
                                                         <div class="dropdown">
                                                             <a href="#" data-toggle="dropdown"

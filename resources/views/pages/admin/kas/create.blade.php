@@ -63,12 +63,13 @@
                                                         <input type="text" name="keterangan" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                {{-- <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">No. Cek</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="no_cek" class="form-control">
+                                                        <input type="text" id="no_cek" name="no_cek"
+                                                            class="form-control" disabled>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +116,10 @@
     <script>
         $('input[name="tanggal_transaksi"]').daterangepicker({
             singleDatePicker: true,
-            showDropdowns: true
+            showDropdowns: true,
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
         });
 
         $('input[name="jumlah"]').on('keyup', function() {

@@ -70,6 +70,7 @@ class SimpananController extends Controller
         $data = $request->all();
         $data['jumlah'] = str_replace('.', '', $data['jumlah']);
         $data['bukti_transaksi'] = $request->file('bukti_transaksi') ? $request->file('bukti_transaksi')->store('bukti-transaksi', 'public') : null;
+        $data['disetujui_oleh'] = auth('admin')->user()->nama;
         $data['status'] = 'DITERIMA';
 
         $simpananPokok = Simpanan::query()
