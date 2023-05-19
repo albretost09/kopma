@@ -157,50 +157,53 @@
 @push('script')
     <script src="{{ asset('backend/vendors/datepicker/daterangepicker.js') }}"></script>
     <script>
-        toastr.options = {
-            timeOut: 3000,
-            progressBar: true,
-            showMethod: "slideDown",
-            hideMethod: "slideUp",
-            showDuration: 200,
-            hideDuration: 200
-        };
+        $(function() {
+            toastr.options = {
+                timeOut: 3000,
+                progressBar: true,
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                showDuration: 200,
+                hideDuration: 200
+            };
 
-        @if (session()->has('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
+            @if (session()->has('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
 
-        @if (session()->has('error'))
-            toastr.danger("{{ session('error') }}");
-        @endif
+            @if (session()->has('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
 
-        $('#tanggal-pembagian').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true
-        });
+            $('#tanggal-pembagian').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true
+            });
 
-        $('#persen_cadangan_koperasi').on('keyup', function() {
-            var persen = $(this).val();
-            var jumlahSHU = $('#jumlahSHU').val();
-            jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
-            var nominal = (persen / 100) * jumlahSHU;
-            $('#nominal_cadangan_koperasi').val(nominal);
-        });
+            $('#persen_cadangan_koperasi').on('keyup', function() {
+                var persen = $(this).val();
+                var jumlahSHU = $('#jumlahSHU').val();
+                jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
+                var nominal = (persen / 100) * jumlahSHU;
+                $('#nominal_cadangan_koperasi').val(nominal);
+            });
 
-        $('#persen_anggota_koperasi').on('keyup', function() {
-            var persen = $(this).val();
-            var jumlahSHU = $('#jumlahSHU').val();
-            jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
-            var nominal = (persen / 100) * jumlahSHU;
-            $('#nominal_anggota_koperasi').val(nominal);
-        });
+            $('#persen_anggota_koperasi').on('keyup', function() {
+                var persen = $(this).val();
+                var jumlahSHU = $('#jumlahSHU').val();
+                jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
+                var nominal = (persen / 100) * jumlahSHU;
+                $('#nominal_anggota_koperasi').val(nominal);
+            });
 
-        $('#persen_dana_sosial').on('keyup', function() {
-            var persen = $(this).val();
-            var jumlahSHU = $('#jumlahSHU').val();
-            jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
-            var nominal = (persen / 100) * jumlahSHU;
-            $('#nominal_dana_sosial').val(nominal);
+            $('#persen_dana_sosial').on('keyup', function() {
+                var persen = $(this).val();
+                var jumlahSHU = $('#jumlahSHU').val();
+                jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
+                var nominal = (persen / 100) * jumlahSHU;
+                $('#nominal_dana_sosial').val(nominal);
+            });
+
         });
     </script>
 @endpush

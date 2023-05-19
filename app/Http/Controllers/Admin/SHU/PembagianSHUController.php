@@ -68,6 +68,16 @@ class PembagianSHUController extends Controller
             return redirect()->route('admin.pembagian-shu.index')->with('error', 'SHU tahun ini sudah dibagikan');
         }
 
+        $totalPersentase = 0;
+
+        foreach ($request->persentase as $value) {
+            $totalPersentase += $value;
+        }
+
+        if ($totalPersentase != 100) {
+            return redirect()->route('admin.pembagian-shu.index')->with('error', 'Total persentase harus 100%');
+        }
+
         $penggunaYgDapatSHU = Pengguna::query()
             ->where('status', 'AKTIF')
             ->get();
