@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="savings" class="table">
+                                    <table id="members" class="table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
