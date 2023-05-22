@@ -55,12 +55,15 @@
                                                     <label class="col-sm-2 col-form-label">Jumlah</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="jumlah" class="form-control">
+                                                        <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Keterangan</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="keterangan" class="form-control">
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('keterangan') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

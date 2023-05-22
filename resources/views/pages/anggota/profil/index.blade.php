@@ -24,18 +24,18 @@
                         <div class="col-md-3">
                             <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-item nav-link active" id="v-pills-home-tab" data-toggle="pill"
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home-tab" data-toggle="pill"
                                     href="#v-pills-home" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Your
                                     Profile</a>
-                                <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill"
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile-tab" data-toggle="pill"
                                     href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
                                     aria-selected="false">Password</a>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home" role="tabpanel"
                                     aria-labelledby="v-pills-home-tab">
                                     <div class="card">
                                         <div class="card-body">
@@ -48,7 +48,7 @@
                                                         <div class="form-group">
                                                             <label>Nama</label>
                                                             <input type="text" class="form-control" name="nama"
-                                                                value="{{ auth()->user()->nama }}">
+                                                                value="{{ old('nama') ?? auth()->user()->nama }}">
                                                             @if ($errors->has('nama'))
                                                                 <span
                                                                     class="text-danger">{{ $errors->first('nama') }}</span>
@@ -57,7 +57,7 @@
                                                         <div class="form-group">
                                                             <label>Username</label>
                                                             <input type="text" class="form-control" name="username"
-                                                                value="{{ auth()->user()->username }}">
+                                                                value="{{ old('username') ?? auth()->user()->username }}">
                                                             @if ($errors->has('username'))
                                                                 <span
                                                                     class="text-danger">{{ $errors->first('username') }}</span>
@@ -66,7 +66,7 @@
                                                         <div class="form-group">
                                                             <label>Email</label>
                                                             <input type="email" class="form-control" name="email"
-                                                                value="{{ auth()->user()->email }}">
+                                                                value="{{ old('email') ?? auth()->user()->email }}">
                                                             @if ($errors->has('email'))
                                                                 <span
                                                                     class="text-danger">{{ $errors->first('email') }}</span>
@@ -78,36 +78,36 @@
                                                             <label>Fakultas</label>
                                                             <select class="form-control" name="fakultas">
                                                                 <option
-                                                                    value="FKIP"{{ auth()->user()->fakultas == 'FKIP' ? ' selected' : '' }}>
+                                                                    value="FKIP"{{ old('fakultas') == 'FKIP' ? ' selected' : (auth()->user()->fakultas == 'FKIP' ? ' selected' : '') }}>
                                                                     FKIP</option>
                                                                 <option
-                                                                    value="Ekonomi"{{ auth()->user()->fakultas == 'Ekonomi' ? ' selected' : '' }}>
+                                                                    value="Ekonomi"{{ old('fakultas') == 'Ekonomi' ? ' selected' : (auth()->user()->fakultas == 'Ekonomi' ? ' selected' : '') }}>
                                                                     Ekonomi</option>
                                                                 <option
-                                                                    value="Pertanian"{{ auth()->user()->fakultas == 'Pertanian' ? ' selected' : '' }}>
+                                                                    value="Pertanian"{{ old('fakultas') == 'Pertanian' ? ' selected' : (auth()->user()->fakultas == 'Pertanian' ? ' selected' : '') }}>
                                                                     Pertanian
                                                                 </option>
                                                                 <option
-                                                                    value="Teknik"{{ auth()->user()->fakultas == 'Teknik' ? ' selected' : '' }}>
+                                                                    value="Teknik"{{ old('fakultas') == 'Teknik' ? ' selected' : (auth()->user()->fakultas == 'Teknik' ? ' selected' : '') }}>
                                                                     Teknik</option>
                                                                 <option
-                                                                    value="Hukum"{{ auth()->user()->fakultas == 'Hukum' ? ' selected' : '' }}>
+                                                                    value="Hukum"{{ old('fakultas') == 'Hukum' ? ' selected' : (auth()->user()->fakultas == 'Hukum' ? ' selected' : '') }}>
                                                                     Hukum</option>
                                                                 <option
-                                                                    value="FISIP"{{ auth()->user()->fakultas == 'FISIP' ? ' selected' : '' }}>
+                                                                    value="FISIP"{{ old('fakultas') == 'FISIP' ? ' selected' : (auth()->user()->fakultas == 'FISIP' ? ' selected' : '') }}>
                                                                     FISIP</option>
                                                                 <option
-                                                                    value="Dokter"{{ auth()->user()->fakultas == 'Dokter' ? ' selected' : '' }}>
+                                                                    value="Dokter"{{ old('fakultas') == 'Dokter' ? ' selected' : (auth()->user()->fakultas == 'Dokter' ? ' selected' : '') }}>
                                                                     Dokter</option>
                                                                 <option
-                                                                    value="MIPA"{{ auth()->user()->fakultas == 'MIPA' ? ' selected' : '' }}>
+                                                                    value="MIPA"{{ old('fakultas') == 'MIPA' ? ' selected' : (auth()->user()->fakultas == 'MIPA' ? ' selected' : '') }}>
                                                                     MIPA</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Jurusan</label>
                                                             <input type="text" class="form-control" name="jurusan"
-                                                                value="{{ auth()->user()->jurusan }}">
+                                                                value="{{ old('jurusan') ?? auth()->user()->jurusan }}">
                                                             @if ($errors->has('jurusan'))
                                                                 <span
                                                                     class="text-danger">{{ $errors->first('jurusan') }}</span>
@@ -115,8 +115,8 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>NIM</label>
-                                                            <input type="number" class="form-control" name="nim"
-                                                                value="{{ auth()->user()->nim }}">
+                                                            <input type="text" class="form-control" name="nim"
+                                                                value="{{ old('nim') ?? auth()->user()->nim }}">
                                                             @if ($errors->has('nim'))
                                                                 <span
                                                                     class="text-danger">{{ $errors->first('nim') }}</span>
@@ -125,7 +125,7 @@
                                                         <div class="form-group">
                                                             <label>NIK</label>
                                                             <input type="number" class="form-control" name="nik"
-                                                                value="{{ auth()->user()->nik }}">
+                                                                value="{{ old('nik') ?? auth()->user()->nik }}">
                                                             @if ($errors->has('nik'))
                                                                 <span
                                                                     class="text-danger">{{ $errors->first('nik') }}</span>
@@ -193,7 +193,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile" role="tabpanel"
                                     aria-labelledby="v-pills-profile-tab">
                                     <div class="card">
                                         <div class="card-body">

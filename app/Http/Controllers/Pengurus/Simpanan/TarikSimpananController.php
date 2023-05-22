@@ -58,8 +58,8 @@ class TarikSimpananController extends Controller
         $request->validate([
             'jenis_transaksi' => 'required|in:Tunai,Transfer',
             'jumlah_penarikan' => 'required|numeric',
-            'bank_tujuan' => 'required_if:jenis_transaksi,Transfer',
-            'nomor_rekening' => 'required_if:jenis_transaksi,Transfer',
+            'bank_tujuan' => 'required',
+            'nomor_rekening' => 'required',
         ]);
 
         $jumlah_tarik = $request->jumlah_penarikan;

@@ -78,13 +78,6 @@
                                                                 data-title="Ubah Status">
                                                                 Ubah Status
                                                             </a>
-                                                            <form action="{{ route('admin.anggota.destroy', $a->id) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="dropdown-item text-danger">Delete</button>
-                                                            </form>
                                                         </div>
                                                     </div>
                                                 </td>

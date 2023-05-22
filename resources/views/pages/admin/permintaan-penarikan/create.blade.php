@@ -62,6 +62,7 @@
                                                     <label class="col-sm-2 col-form-label">Jumlah</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="jumlah_penarikan" class="form-control">
+                                                        <span class="text-danger">{{ $errors->first('jumlah_penarikan') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

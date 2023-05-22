@@ -65,13 +65,16 @@
                                                     <label class="col-sm-2 col-form-label">Jumlah</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" name="jumlah" class="form-control">
+                                                        <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row bukti">
                                                     <label class="col-sm-2 col-form-label">Bukti Transfer</label>
                                                     <div class="col-sm-10">
                                                         <input type="file" name="bukti_transaksi" accept="image/*"
-                                                            class="form-control border border-0">
+                                                            class="form-control border border-0" required>
+                                                        <span
+                                                            class="text-danger">{{ $errors->first('bukti_transaksi') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row bukti">

@@ -47,28 +47,32 @@
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Jumlah</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="jumlah_penarikan" class="form-control">
+                                                        <input type="text" name="jumlah_penarikan" class="form-control" value="{{ old('jumlah_penarikan') }}">
+                                                        <span class="text-danger">{{ $errors->first('jumlah_penarikan') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Bank Tujuan</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-select select2" id="bank_tujuan"
-                                                            name="bank_tujuan" required>
+                                                            name="bank_tujuan">
                                                             <option value="">Pilih Bank</option>
                                                         </select>
+                                                        <span class="text-danger">{{ $errors->first('bank_tujuan') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">No. Rekening</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="nomor_rekening" class="form-control">
+                                                        <input type="text" name="nomor_rekening" class="form-control" value="{{ old('nomor_rekening') }}">
+                                                        <span class="text-danger">{{ $errors->first('nomor_rekening') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-sm-2 col-form-label">Nama Pemilik Rekening</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="nama_pemilik" class="form-control">
+                                                        <input type="text" name="nama_pemilik" class="form-control" value="{{ old('nama_pemilik') }}">
+                                                        <span class="text-danger">{{ $errors->first('nama_pemilik') }}</span>
                                                     </div>
                                                 </div>
                                             </div>

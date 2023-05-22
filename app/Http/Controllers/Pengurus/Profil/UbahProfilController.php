@@ -10,12 +10,12 @@ class UbahProfilController extends Controller
     public function __invoke(Request $request)
     {
         $request->validate([
-            'nama' => 'nullable',
-            'username' => 'nullable',
-            'email' => 'nullable|email',
+            'nama' => 'required',
+            'username' => 'required',
+            'email' => 'required|email',
             'fakultas' => 'nullable',
             'jurusan' => 'nullable',
-            'nim' => 'nullable',
+            'nim' => 'required',
             'nik' => 'nullable|numeric|digits:16',
             'tempat_lahir' => 'nullable',
             'tanggal_lahir' => 'nullable|date',

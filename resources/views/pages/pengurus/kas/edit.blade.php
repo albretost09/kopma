@@ -57,6 +57,7 @@
                                                     <div class="col-sm-10">
                                                         <input type="text" name="jumlah" value="{{ $kas->jumlah }}"
                                                             class="form-control">
+                                                        <span class="text-danger">{{ $errors->first('jumlah') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -64,6 +65,7 @@
                                                     <div class="col-sm-10">
                                                         <input type="text" name="keterangan"
                                                             value="{{ $kas->keterangan }}" class="form-control">
+                                                        <span class="text-danger">{{ $errors->first('keterangan') }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

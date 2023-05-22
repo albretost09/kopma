@@ -24,18 +24,18 @@
                         <div class="col-md-3">
                             <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-item nav-link active" id="v-pills-home-tab" data-toggle="pill"
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home-tab" data-toggle="pill"
                                     href="#v-pills-home" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Your
                                     Profile</a>
-                                <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill"
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile-tab" data-toggle="pill"
                                     href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
                                     aria-selected="false">Password</a>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home" role="tabpanel"
                                     aria-labelledby="v-pills-home-tab">
                                     <div class="card">
                                         <div class="card-body">
@@ -115,7 +115,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label>NIM</label>
-                                                            <input type="number" class="form-control" name="nim"
+                                                            <input type="text" class="form-control" name="nim"
                                                                 value="{{ auth()->user()->nim }}">
                                                             @if ($errors->has('nim'))
                                                                 <span
@@ -193,7 +193,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile" role="tabpanel"
                                     aria-labelledby="v-pills-profile-tab">
                                     <div class="card">
                                         <div class="card-body">

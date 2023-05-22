@@ -34,29 +34,35 @@
                                                 <div class="form-group">
                                                     <label>Nama</label>
                                                     <input type="text" name="nama" class="form-control">
+                                                    <span class="text-danger">{{ $errors->first('nama') }}</span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>NIK</label>
                                                     <input type="number" name="nik" class="form-control">
+                                                    <span class="text-danger">{{ $errors->first('nik') }}</span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Username</label>
                                                     <input type="text" name="username" class="form-control">
+                                                    <span class="text-danger">{{ $errors->first('username') }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Email</label>
                                                     <input type="text" name="email" class="form-control">
+                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
                                                     <input type="password" name="password" class="form-control">
+                                                    <span class="text-danger">{{ $errors->first('password') }}</span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Confirm Password</label>
                                                     <input type="password" name="password_confirmation"
                                                         class="form-control">
+                                                    <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                                 </div>
                                             </div>
                                         </div>
