@@ -114,6 +114,15 @@ class KasController extends Controller
         $jenis = $data['jenis'] == 'Masuk' ? 'UM' : 'UK';
         $no_cek = $nomor . '/' . $jenis . '/' . $bulan . '/' . $tahun;
 
+        if (Kas::where('no_cek', $no_cek)->exists()) {
+            $nomor = $nomor + 1;
+            // convert to romawi
+            $bulan = toRoman($bulan);
+            $tahun = explode('/', $data['tanggal_transaksi'])[2];
+            $jenis = $data['jenis'] == 'Masuk' ? 'UM' : 'UK';
+            $no_cek = $nomor . '/' . $jenis . '/' . $bulan . '/' . $tahun;
+        }
+
         $data['no_cek'] = $no_cek;
         $data['tanggal_transaksi'] = Carbon::createFromFormat('d/m/Y', $data['tanggal_transaksi'])->format('Y-m-d');
 
