@@ -115,7 +115,11 @@ class KasController extends Controller
         $no_cek = $nomor . '/' . $jenis . '/' . $bulan . '/' . $tahun;
 
         if (Kas::where('no_cek', $no_cek)->exists()) {
-            $nomor = $nomor + 1;
+            $bulan = explode('/', $data['tanggal_transaksi'])[1];
+            $tahun = explode('/', $data['tanggal_transaksi'])[2];
+            $nomor = Kas::whereMonth('tanggal_transaksi', $bulan)->whereYear('tanggal_transaksi', $tahun)->where('jenis', $data['jenis'])->exists() ? Kas::whereMonth('tanggal_transaksi', $bulan)->whereYear('tanggal_transaksi', $tahun)->where('jenis', $data['jenis'])->latest()->first()->id + 1 : 1;
+            $nomor = ($nomor + 1);
+            $nomor = str_pad($nomor, 3, '0', STR_PAD_LEFT);
             // convert to romawi
             $bulan = toRoman($bulan);
             $tahun = explode('/', $data['tanggal_transaksi'])[2];
