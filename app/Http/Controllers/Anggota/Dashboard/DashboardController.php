@@ -35,8 +35,7 @@ class DashboardController extends Controller
         $jumlahSimpananPokokWajib = Simpanan::query()
             ->where('pengguna_id', auth()->user()->id)
             ->where('status', 'DITERIMA')
-            ->where('jenis_simpanan', 'Pokok')
-            ->orWhere('jenis_simpanan', 'Wajib')
+            ->whereIn('jenis_simpanan', ['Pokok', 'Wajib'])
             ->sum('jumlah') ?? 0;
         $jumlahSaldo = $jumlahSimpananSukarela + $jumlahSimpananPokokWajib;
 
