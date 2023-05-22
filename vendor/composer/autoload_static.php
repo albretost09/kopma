@@ -603,6 +603,7 @@ class ComposerStaticInit32d7febab7088907839a403dc01026b5
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Kas' => __DIR__ . '/../..' . '/app/Models/Kas.php',
         'App\\Models\\Pengguna' => __DIR__ . '/../..' . '/app/Models/Pengguna.php',
+        'App\\Models\\PengunduranDiri' => __DIR__ . '/../..' . '/app/Models/PengunduranDiri.php',
         'App\\Models\\RiwayatPenarikan' => __DIR__ . '/../..' . '/app/Models/RiwayatPenarikan.php',
         'App\\Models\\SHU' => __DIR__ . '/../..' . '/app/Models/SHU.php',
         'App\\Models\\Simpanan' => __DIR__ . '/../..' . '/app/Models/Simpanan.php',

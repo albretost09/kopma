@@ -24,19 +24,22 @@
                         <div class="col-md-3">
                             <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-item nav-link {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home-tab" data-toggle="pill"
-                                    href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-                                    aria-selected="true">Your
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? '' : 'active' }}"
+                                    id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                                    aria-controls="v-pills-home" aria-selected="true">Your
                                     Profile</a>
-                                <a class="nav-item nav-link {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile-tab" data-toggle="pill"
-                                    href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
-                                    aria-selected="false">Password</a>
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? 'active' : '' }}"
+                                    id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                                    aria-controls="v-pills-profile" aria-selected="false">Password</a>
+                                <a class="nav-item nav-link" id="v-pills-account-tab" data-toggle="pill"
+                                    href="#v-pills-account" role="tab" aria-controls="v-pills-account"
+                                    aria-selected="false">Pengunduran Diri</a>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home" role="tabpanel"
-                                    aria-labelledby="v-pills-home-tab">
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? '' : 'active' }}"
+                                    id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-title">Your Profile</h6>
@@ -193,8 +196,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade show {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile" role="tabpanel"
-                                    aria-labelledby="v-pills-profile-tab">
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? 'active' : '' }}"
+                                    id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-title">Password</h6>
@@ -236,34 +239,102 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade show" id="v-pills-account" role="tabpanel"
+                                    aria-labelledby="v-pills-account-tab">
+                                    @if ($pengunduranDiri->status == 'MENUNGGU')
+                                        <div class="alert alert-warning">
+                                            <strong>Perhatian!</strong> Pengunduran diri anda sedang menunggu
+                                            persetujuan dari admin.
+                                        </div>
+                                    @elseif($pengunduranDiri->status == 'DITERIMA')
+                                        <div class="alert alert-success">
+                                            <strong>Perhatian!</strong> Pengunduran diri anda telah diterima.
+                                        </div>
+                                    @else
+                                        <div class="card">
+                                            <form action="{{ route('anggota.profil.pengunduran-diri') }}" method="post">
+                                                @csrf
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Pengunduran Diri</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="alasan">Alasan</label>
+                                                                <textarea class="form-control" name="alasan" id="alasan" rows="3"></textarea>
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('alasan') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                        data-target="#pengunduranDiri">Submit</button>
+                                                </div>
+                                                <div class="modal fade" id="pengunduranDiri" tabindex="-1"
+                                                    role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="pengunduranDiriTitle">Anda
+                                                                    yakin
+                                                                    ingin
+                                                                    mengundurkan
+                                                                    diri?</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <i class="ti-close"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="text-center">
+                                                                    Keputusan ini tidak dapat dibatalkan, dan Anda akan
+                                                                    kehilangan
+                                                                    akses ke semua
+                                                                    fitur dan konten yang terkait dengan akun ini. Mohon
+                                                                    konfirmasikan keputusan
+                                                                    Anda.
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit"
+                                                                    class="btn btn-secondary btn-block">Saya
+                                                                    ingin mengundurkan
+                                                                    diri</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- ./ Content -->
+            @include('includes.admin.footer')
         </div>
-        <!-- ./ Content -->
-        @include('includes.admin.footer')
-    </div>
-@endsection
+    @endsection
 
-@push('script')
-    <script>
-        toastr.options = {
-            timeOut: 3000,
-            progressBar: true,
-            showMethod: "slideDown",
-            hideMethod: "slideUp",
-            showDuration: 200,
-            hideDuration: 200
-        };
+    @push('script')
+        <script>
+            toastr.options = {
+                timeOut: 3000,
+                progressBar: true,
+                showMethod: "slideDown",
+                hideMethod: "slideUp",
+                showDuration: 200,
+                hideDuration: 200
+            };
 
-        @if (session()->has('success'))
-            toastr.success("{{ session('success') }}");
-        @endif
+            @if (session()->has('success'))
+                toastr.success("{{ session('success') }}");
+            @endif
 
-        @if (session()->has('error'))
-            toastr.error("{{ session('error') }}");
-        @endif
-    </script>
-@endpush
+            @if (session()->has('error'))
+                toastr.error("{{ session('error') }}");
+            @endif
+        </script>
+    @endpush

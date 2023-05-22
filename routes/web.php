@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
             Route::get('', [Anggota\Profil\ProfilController::class, 'index'])->name('index');
             Route::put('ubah', Anggota\Profil\UbahProfilController::class)->name('ubah-profil');
             Route::put('ubah-password', Anggota\Profil\UbahPasswordController::class)->name('ubah-password');
+            Route::post('pengunduran-diri', Anggota\Profil\PengunduranDiriController::class)->name('pengunduran-diri');
         });
 
         Route::prefix('setor-simpanan')->name('setor-simpanan.')->group(function () {
@@ -137,6 +138,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('permintaan-penarikan/{id}/status', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'ubahStatus'])->name('permintaan-penarikan.ubah-status');
         Route::post('permintaan-penarikan/data', [Admin\Simpanan\PermintaanPenarikanSimpananController::class, 'data'])->name('permintaan-penarikan.data');
         Route::resource('permintaan-penarikan', Admin\Simpanan\PermintaanPenarikanSimpananController::class);
+        Route::resource('pengunduran-diri', Admin\PengunduranDiri\PengunduranDiriController::class);
 
         Route::prefix('pembagian-shu')->name('pembagian-shu.')->group(function () {
             Route::get('', [Admin\SHU\PembagianSHUController::class, 'index'])->name('index');

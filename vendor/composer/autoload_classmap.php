@@ -79,6 +79,7 @@ return array(
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Kas' => $baseDir . '/app/Models/Kas.php',
     'App\\Models\\Pengguna' => $baseDir . '/app/Models/Pengguna.php',
+    'App\\Models\\PengunduranDiri' => $baseDir . '/app/Models/PengunduranDiri.php',
     'App\\Models\\RiwayatPenarikan' => $baseDir . '/app/Models/RiwayatPenarikan.php',
     'App\\Models\\SHU' => $baseDir . '/app/Models/SHU.php',
     'App\\Models\\Simpanan' => $baseDir . '/app/Models/Simpanan.php',

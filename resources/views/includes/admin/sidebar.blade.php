@@ -92,6 +92,15 @@
                     </a>
                 </li>
                 <li>
+                    <a {{ request()->routeIs('admin.pengunduran-diri*') ? 'class=active ' : '' }}
+                        href="{{ route('admin.pengunduran-diri.index') }}">
+                        <span class="nav-link-icon">
+                            <i data-feather="user"></i>
+                        </span>
+                        <span>Permintaan Pengunduran</span>
+                    </a>
+                </li>
+                <li>
                     <a {{ request()->routeIs('admin.pembagian-shu*') ? 'class=active ' : '' }}
                         href="{{ route('admin.pembagian-shu.index') }}">
                         <span class="nav-link-icon">
