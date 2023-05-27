@@ -241,16 +241,7 @@
                                 </div>
                                 <div class="tab-pane fade show" id="v-pills-account" role="tabpanel"
                                     aria-labelledby="v-pills-account-tab">
-                                    @if ($pengunduranDiri->status == 'MENUNGGU')
-                                        <div class="alert alert-warning">
-                                            <strong>Perhatian!</strong> Pengunduran diri anda sedang menunggu
-                                            persetujuan dari admin.
-                                        </div>
-                                    @elseif($pengunduranDiri->status == 'DITERIMA')
-                                        <div class="alert alert-success">
-                                            <strong>Perhatian!</strong> Pengunduran diri anda telah diterima.
-                                        </div>
-                                    @else
+                                    @if (empty($pengunduranDiri->status))
                                         <div class="card">
                                             <form action="{{ route('anggota.profil.pengunduran-diri') }}" method="post">
                                                 @csrf
@@ -305,6 +296,17 @@
                                                 </div>
                                             </form>
                                         </div>
+                                    @elseif ($pengunduranDiri->status == 'MENUNGGU')
+                                        <div class="alert alert-warning">
+                                            <strong>Perhatian!</strong> Pengunduran diri anda sedang menunggu
+                                            persetujuan dari admin.
+                                        </div>
+                                    @elseif($pengunduranDiri->status == 'DITERIMA')
+                                        <div class="alert alert-success">
+                                            <strong>Perhatian!</strong> Pengunduran diri anda telah diterima.
+                                        </div>
+                                        <a href="{{ route('anggota.profil.pengunduran-diri.cetak') }}" target="_blank"
+                                            class="btn btn-primary">Cetak Surat Pengunduran Diri</a>
                                     @endif
                                     </span>
                                 </div>

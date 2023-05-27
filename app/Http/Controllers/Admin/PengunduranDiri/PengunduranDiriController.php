@@ -18,7 +18,6 @@ class PengunduranDiriController extends Controller
     public function index()
     {
         $permintaanPengunduran = PengunduranDiri::with('pengguna')
-            ->where('status', 'MENUNGGU')
             ->orderBy('tanggal_pengajuan', 'DESC')
             ->get();
 
@@ -54,9 +53,7 @@ class PengunduranDiriController extends Controller
      */
     public function show($id)
     {
-        $pengunduranDiri = PengunduranDiri::with('pengguna')
-            ->where('id', $id)
-            ->first();
+        $pengunduranDiri = PengunduranDiri::findOrfail($id);
 
         $simpanan = Simpanan::where('pengguna_id', $pengunduranDiri->pengguna_id);
         $totalPenarikan = RiwayatPenarikan::whereIn('simpanan_id', $simpanan->pluck('id'))->sum('jumlah_penarikan');

@@ -156,7 +156,7 @@
 
         <div class="mt-3">
             <code class="text-danger">*</code>
-            untuk pengambilan uang simpanan silahkan dating langsung ke sekretariatan Kopma UPR dengan membawa surat
+            untuk pengambilan uang simpanan silahkan datang langsung ke sekretariat Kopma UPR dengan membawa surat
             ini.
         </div>
 </body>

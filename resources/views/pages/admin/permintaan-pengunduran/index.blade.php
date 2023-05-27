@@ -71,6 +71,12 @@
                                                             <a target="_blank"
                                                                 href="{{ route('admin.pengunduran-diri.show', $p->id) }}"
                                                                 class="dropdown-item"> Lihat Pengajuan </a>
+                                                            <a href="#myModal" class="dropdown-item"
+                                                                data-remote="{{ route('admin.validasi-pengunduran-diri.show', $p->id) }}"
+                                                                data-toggle="modal" data-target="#myModal"
+                                                                data-title="Permintaan Pengunduran Diri">
+                                                                Validasi Pengunduran
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </td>
