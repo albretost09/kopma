@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('profil')->name('profil.')->group(function () {
             Route::get('', [Anggota\Profil\ProfilController::class, 'index'])->name('index');
             Route::put('ubah', Anggota\Profil\UbahProfilController::class)->name('ubah-profil');
+            Route::put('ubah-kontak', Anggota\Profil\UbahKontakController::class)->name('ubah-kontak');
             Route::put('ubah-password', Anggota\Profil\UbahPasswordController::class)->name('ubah-password');
             Route::post('pengunduran-diri', Anggota\Profil\PengunduranDiriController::class)->name('pengunduran-diri');
             Route::get('pengunduran-diri/cetak', Anggota\Profil\CetakPengunduranDiriController::class)->name('pengunduran-diri.cetak');
@@ -63,6 +64,7 @@ Route::prefix('pengurus')->name('pengurus.')->group(
             Route::prefix('profil')->name('profil.')->group(function () {
                 Route::get('', [Pengurus\Profil\ProfilController::class, 'index'])->name('index');
                 Route::put('ubah', Pengurus\Profil\UbahProfilController::class)->name('ubah-profil');
+                Route::put('ubah-kontak', Pengurus\Profil\UbahKontakController::class)->name('ubah-kontak');
                 Route::put('ubah-password', Pengurus\Profil\UbahPasswordController::class)->name('ubah-password');
             });
 

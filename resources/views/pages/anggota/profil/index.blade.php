@@ -143,7 +143,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-title">Contact</h6>
-                                            <form action="{{ route('anggota.profil.ubah-profil') }}" method="post">
+                                            <form action="{{ route('anggota.profil.ubah-kontak') }}" method="post">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="row">
@@ -153,12 +153,20 @@
                                                             <input type="text" class="form-control"
                                                                 name="tempat_lahir"
                                                                 value="{{ auth()->user()->tempat_lahir }}">
+                                                            @if ($errors->has('tempat_lahir'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('tempat_lahir') }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Tanggal Lahir</label>
                                                             <input type="text" class="form-control"
                                                                 name="tanggal_lahir"
                                                                 value="{{ auth()->user()->tanggal_lahir->format('d-m-Y') }}">
+                                                            @if ($errors->has('tanggal_lahir'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('tanggal_lahir') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -178,16 +186,28 @@
                                                                 <label class="custom-control-label"
                                                                     for="customRadio2">Perempuan</label>
                                                             </div>
+                                                            @if ($errors->has('jenis_kelamin'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('jenis_kelamin') }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label>No. HP</label>
                                                             <input type="text" class="form-control" name="no_hp"
                                                                 value="{{ auth()->user()->no_hp }}">
+                                                            @if ($errors->has('no_hp'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('no_hp') }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Alamat</label>
                                                             <input type="text" class="form-control" name="alamat"
                                                                 value="{{ auth()->user()->alamat }}">
+                                                            @if ($errors->has('alamat'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('alamat') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,6 +262,65 @@
                                 <div class="tab-pane fade show" id="v-pills-account" role="tabpanel"
                                     aria-labelledby="v-pills-account-tab">
                                     @if (empty($pengunduranDiri->status))
+                                        <div class="card">
+                                            <form action="{{ route('anggota.profil.pengunduran-diri') }}" method="post">
+                                                @csrf
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Pengunduran Diri</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="alasan">Alasan</label>
+                                                                <textarea class="form-control" name="alasan" id="alasan" rows="3"></textarea>
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('alasan') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                        data-target="#pengunduranDiri">Submit</button>
+                                                </div>
+                                                <div class="modal fade" id="pengunduranDiri" tabindex="-1"
+                                                    role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="pengunduranDiriTitle">Anda
+                                                                    yakin
+                                                                    ingin
+                                                                    mengundurkan
+                                                                    diri?</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <i class="ti-close"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="text-center">
+                                                                    Keputusan ini tidak dapat dibatalkan, dan Anda akan
+                                                                    kehilangan
+                                                                    akses ke semua
+                                                                    fitur dan konten yang terkait dengan akun ini. Mohon
+                                                                    konfirmasikan keputusan
+                                                                    Anda.
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit"
+                                                                    class="btn btn-secondary btn-block">Saya
+                                                                    ingin mengundurkan
+                                                                    diri</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @elseif ($pengunduranDiri->status == 'DITOLAK')
+                                        <div class="alert alert-danger mb-3">
+                                            <strong>Perhatian!</strong> Pengunduran diri anda telah ditolak.
+                                        </div>
+
                                         <div class="card">
                                             <form action="{{ route('anggota.profil.pengunduran-diri') }}" method="post">
                                                 @csrf

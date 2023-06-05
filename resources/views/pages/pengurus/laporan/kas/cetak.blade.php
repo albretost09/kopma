@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('pengurus.laporan-kas.cetak-pdf') }}" method="post">
+            <form action="{{ route('pengurus.laporan-kas.cetak-pdf') }}" target="_blank" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-5">

@@ -24,19 +24,19 @@
                         <div class="col-md-3">
                             <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-item nav-link {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home-tab" data-toggle="pill"
-                                    href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-                                    aria-selected="true">Your
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? '' : 'active' }}"
+                                    id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                                    aria-controls="v-pills-home" aria-selected="true">Your
                                     Profile</a>
-                                <a class="nav-item nav-link {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile-tab" data-toggle="pill"
-                                    href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
-                                    aria-selected="false">Password</a>
+                                <a class="nav-item nav-link {{ $errors->has('*password') ? 'active' : '' }}"
+                                    id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                                    aria-controls="v-pills-profile" aria-selected="false">Password</a>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="tab-content" id="v-pills-tabContent">
-                                <div class="tab-pane fade show {{ $errors->has('*password') ? '' : 'active'  }}" id="v-pills-home" role="tabpanel"
-                                    aria-labelledby="v-pills-home-tab">
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? '' : 'active' }}"
+                                    id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-title">Your Profile</h6>
@@ -140,7 +140,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-title">Contact</h6>
-                                            <form action="{{ route('pengurus.profil.ubah-profil') }}" method="post">
+                                            <form action="{{ route('pengurus.profil.ubah-kontak') }}" method="post">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="row">
@@ -150,12 +150,20 @@
                                                             <input type="text" class="form-control"
                                                                 name="tempat_lahir"
                                                                 value="{{ auth()->user()->tempat_lahir }}">
+                                                            @if ($errors->has('tempat_lahir'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('tempat_lahir') }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Tanggal Lahir</label>
                                                             <input type="text" class="form-control"
                                                                 name="tanggal_lahir"
                                                                 value="{{ auth()->user()->tanggal_lahir->format('d-m-Y') }}">
+                                                            @if ($errors->has('tanggal_lahir'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('tanggal_lahir') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -175,16 +183,28 @@
                                                                 <label class="custom-control-label"
                                                                     for="customRadio2">Perempuan</label>
                                                             </div>
+                                                            @if ($errors->has('jenis_kelamin'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('jenis_kelamin') }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label>No. HP</label>
                                                             <input type="text" class="form-control" name="no_hp"
                                                                 value="{{ auth()->user()->no_hp }}">
+                                                            @if ($errors->has('no_hp'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('no_hp') }}</span>
+                                                            @endif
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Alamat</label>
                                                             <input type="text" class="form-control" name="alamat"
                                                                 value="{{ auth()->user()->alamat }}">
+                                                            @if ($errors->has('alamat'))
+                                                                <span
+                                                                    class="text-danger">{{ $errors->first('alamat') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -193,8 +213,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade show {{ $errors->has('*password') ? 'active' : ''  }}" id="v-pills-profile" role="tabpanel"
-                                    aria-labelledby="v-pills-profile-tab">
+                                <div class="tab-pane fade show {{ $errors->has('*password') ? 'active' : '' }}"
+                                    id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-title">Password</h6>
