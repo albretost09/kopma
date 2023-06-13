@@ -175,24 +175,29 @@
                                                     @endif
                                                     <td>{{ $k->dibuat_oleh }}</td>
                                                     <td class="text-right">
-                                                        <div class="dropdown">
-                                                            <a href="#" data-toggle="dropdown"
-                                                                class="btn btn-floating" aria-haspopup="true"
-                                                                aria-expanded="false">
-                                                                <i class="ti-more-alt"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="{{ route('admin.kas.edit', $k->id) }}"
-                                                                    class="dropdown-item">Edit</a>
-                                                                <form action="{{ route('admin.kas.destroy', $k->id) }}"
-                                                                    method="post">
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="submit"
-                                                                        class="dropdown-item text-danger">Delete</button>
-                                                                </form>
+                                                        @if ($k->jenis == 'Keluar' && substr($k->keterangan, 0, 3) == 'SHU')
+                                                            <div></div>
+                                                        @else
+                                                            <div class="dropdown">
+                                                                <a href="#" data-toggle="dropdown"
+                                                                    class="btn btn-floating" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    <i class="ti-more-alt"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a href="{{ route('admin.kas.edit', $k->id) }}"
+                                                                        class="dropdown-item">Edit</a>
+                                                                    <form
+                                                                        action="{{ route('admin.kas.destroy', $k->id) }}"
+                                                                        method="post">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            class="dropdown-item text-danger">Delete</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @empty

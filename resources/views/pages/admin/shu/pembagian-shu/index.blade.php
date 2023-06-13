@@ -65,7 +65,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control" name="persentase[]"
-                                            id="persen_cadangan_koperasi" max="100"
+                                            id="persen_cadangan_koperasi" min="0" max="100"
                                             value={{ $SHUCadanganKoperasi?->persentase ?? 0 }}>
                                     </td>
                                     <td>
@@ -81,7 +81,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control" name="persentase[]"
-                                            id="persen_anggota_koperasi" max="100"
+                                            id="persen_anggota_koperasi" min="0" max="100"
                                             value="{{ $SHUAnggotaKoperasi?->persentase ?? 0 }}">
                                     </td>
                                     <td>
@@ -97,7 +97,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control" name="persentase[]"
-                                            id="persen_dana_sosial" max="100"
+                                            id="persen_dana_sosial" min="0" max="100"
                                             value="{{ $SHUDanaSosial?->persentase ?? 0 }}">
                                     </td>
                                     <td>
@@ -202,6 +202,10 @@
                 jumlahSHU = jumlahSHU.replace(/[^,\d]/g, '').toString();
                 var nominal = (persen / 100) * jumlahSHU;
                 $('#nominal_dana_sosial').val(nominal);
+            });
+
+            $('input[type=number]').on('keyup', function() {
+                $(this).val($(this).val().replace(/[^0-9]/g, ''));
             });
 
         });
